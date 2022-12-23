@@ -1,0 +1,332 @@
+﻿
+@{
+    ViewBag.Title = "Student_Mark";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+<h2>Student_Mark</h2>
+<main id="main" class="main">
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                        <div class="col-sm-8">
+
+                            <label for="inputNanme4" class="form-label"><b>Student</b> ID</label>
+                            @*<input type="" class="form-control" id="id" name="id" required><br />*@
+                            <input type="text" class="form-control" id="id" name="id" required><br />
+                            <input type="hidden" class="form-control" id="Studentid" required><br />
+                            <button class="btn btn-primary" onclick="GetStudent()">Search</button>
+                        </div>
+
+                        <div class="col-sm-8">
+
+                            <label for="inputNanme4" class="form-label"><b> Name</b></label>
+                            <input type="text" class="form-control" id="Name" name="Name" required>
+
+
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="inputNanme4" class="form-label"><b>Year</b></label>
+                            <input type="text" class="form-control" id="txtYear" required><br />
+                            <br />
+                            <button class="btn btn-primary" onclick="GetStudentByNameYear()">Search</button>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="col-xl-8">
+              
+                    <div class="card">
+                        
+                        <div class="card-body pt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card-body profile-card pt-4 d-flex flex-column @*align-items-center*@">
+                                        <span class="badge bg-warning text-dark" id="statusspan" style="width:100px;margin-left:150px">Runing</span>
+                                        <img src="~/Content/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                                        <h2 id="nameh1">Kevin Anderson  </h2>
+                                        <div class="col-2">
+
+                                        </div>
+
+                                        <h3>Web Designer</h3>
+
+                                        <div class="social-links mt-2">
+                                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <br/>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                    
+                                    <div class="col-6">
+                                        <label>Status</label>
+                                        <select class="form-select" id="status" required="">
+                                            <option value="Runing">Runing</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Complete">Complete</option>
+
+                                        </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <br />
+                                           
+                                            <button class="btn btn-primary" onclick="StudentSetById()">Set</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                    </div>
+                                    <form>
+                                        <!-- Bordered Tabs -->
+                                        <ul class="nav nav-tabs nav-tabs-bordered" role="tablist">
+
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" aria-selected="true" role="tab">Student Id</button>
+                                            </li>
+
+                                        </ul>
+
+                                        <div class="tab-content pt-2 align_text-center">
+                                            <input type="hidden" class="form-control" id="id" name="id">
+                                            <div class="row">
+
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label"> Name:</label>
+                                                    <span id="name"></span>
+
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Father Name:</label>
+                                                    <span id="f_name"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Mother Name:</label>
+                                                    <span id="m_name"></span>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Last Class:</label>
+                                                    <span id="lst_class"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Date of Birthday:</label>
+                                                    <span id="dob"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Course Name:</label>
+                                                    <span id="course_name"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Cast: </label>
+                                                    <span id="cast"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Religion :</label>
+                                                    <span id="religion"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label"> Address:</label>
+                                                    <span id="address"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Aadhar Number:</label>
+                                                    <span id="aadhar_NO"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">What'sApp Self:</label>
+                                                    <span id="whats_no_self"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">What'sApp Home:</label>
+                                                    <span id="whats_no_home"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Email:</label>
+                                                    <span id="email"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputname" class="form-label">Relrral Id</label>
+                                                    <span id="refid"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="inputNanme4" class="form-label">Institute Id:</label>
+                                                    <span id="institute_id"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="inputname" class="form-label">Year:</label>
+                                                    <span id="Year"></span>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+             
+
+                <div class="col-xl-4">
+
+                    <div class="card">
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function GetStudent() {
+        var id = $("#id").val();
+        if (id == '' || id == null) {
+            alert("Please Enter the Id..");
+            return false;
+        }
+        $.ajax({
+            url: '/Institute/Student_MarkDetail',
+            type: 'POST',
+            data: { Id: id},
+            success: function (data) {
+                alert("success");
+
+                $('#Studentid').val(data.id);
+                $('#name').html(data.name);
+                $('#f_name').html(data.f_name);
+                $('#m_name').html(data.m_name);
+                $('#lst_class').html(data.lst_class);
+                $('#dob').html(data.dob);
+                $('#course_name').html(data.course_name);
+                $('#cast').html(data.cast);
+                $('#religion').html(data.religion);
+                $('#address').html(data.address);
+                $('#aadhar_NO').html(data.aadhar_NO);
+                $('#whats_no_self').html(data.whats_no_self);
+                $('#whats_no_home').html(data.whats_no_home);
+                $('#email').html(data.email);
+                $('#refid').html(data.refid);
+                $('#institute_id').html(data.institute_id);
+                $('#Year').html(data.Year);
+                $('#status').val(data.Status);
+                // <h2 id="nameh1">Kevin Anderson  <span class="badge bg-warning text-dark" id="statusspan">Runing</span></h2>
+                $('#statusspan').html(data.Status);
+                $('#nameh1').text(data.name);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+    function GetStudentByNameYear() {
+        var name = $("#Name").val();
+        var year = $("#txtYear").val();
+        if (name == '' || name == null && year==''|| year==null ) {
+            alert("Please Enter Name and Year.");
+            return false;
+        }
+        $.ajax({
+            url: '/Institute/Student_MarkDetailNameYear',
+            type: 'POST',
+            data: { Name: name, Year: year },
+            success: function (data) {
+                alert("success");
+
+                $('#Studentid').val(data.id);
+                $('#name').html(data.name);
+                $('#f_name').html(data.f_name);
+                $('#m_name').html(data.m_name);
+                $('#lst_class').html(data.lst_class);
+                $('#dob').html(data.dob);
+                $('#course_name').html(data.course_name);
+                $('#cast').html(data.cast);
+                $('#religion').html(data.religion);
+                $('#address').html(data.address);
+                $('#aadhar_NO').html(data.aadhar_NO);
+                $('#whats_no_self').html(data.whats_no_self);
+                $('#whats_no_home').html(data.whats_no_home);
+                $('#email').html(data.email);
+                $('#refid').html(data.refid);
+                $('#institute_id').html(data.institute_id);
+                $('#Year').html(data.Year);
+                $('#status').val(data.Status);
+                $('#statusspan').html(data.Status);
+                $('#nameh1').text(data.name);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function StudentSetById() {
+        var id = $("#Studentid").val();
+        if (id == '' || id == null) {
+            alert("Please GET Profile..");
+            return false;
+        }
+        var status = $('#status').val();
+        alert(id + status);
+        $.ajax({
+            url: '/Institute/SetStatus',
+            type: 'POST',
+            data: { Id: id, Status: status },
+            success: function (data) {
+              
+                alert("Status Updated ..");
+
+                //$('#id').html(data.id);
+                
+                //$('#inputNanme4').focus();
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+</script>

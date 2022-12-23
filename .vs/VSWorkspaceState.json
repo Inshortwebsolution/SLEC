@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SLEC",
+    "\\SLEC\\SLEC",
+    "\\SLEC\\SLEC\\Controllers",
+    "\\SLEC\\SLEC\\Views",
+    "\\SLEC\\SLEC\\Views\\Institute",
+    "\\SLEC\\SLEC_API"
   ],
   "PreviewInSolutionExplorer": false
 }

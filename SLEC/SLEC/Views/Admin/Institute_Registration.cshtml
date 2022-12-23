@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Institute_Registration";
+    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
+}
+
+
+
+<main id="main" class="main">
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Institute</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" action="/Admin/Institute_Registration" method="post">
+            <input type="hidden" class="form-control" id="id" name="id">
+            <div class="col-md-4">
+                <label for="inputName5" class="form-label">Your Name:</label>
+                <input type="text" class="form-control" id="instituteName" name="name">
+            </div>
+            <div class="col-md-4">
+                <label for="inputEmail5" class="form-label">Mobile:</label>
+                <input type="number" class="form-control" id="Mobile" name="mobile">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword5" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="SEmail" name="Email">
+            </div>
+            <div class="col-md-4">
+                <label for="inputEmail5" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="inputpassword" name="password">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword5" class="form-label"> Address:</label>
+                <input type="text" class="form-control" id="Address" name="address">
+            </div>
+
+            <div class="col-4">
+                <label for="inputAddress5" class="form-label">Your Education:</label>
+                <input type="text" class="form-control" id="YourEducation" placeholder="" name="YourEducation">
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputPassword5" class="form-label">Institute Type:</label>
+
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineRadio" value="option1" name="Institute_type">
+                    <label class="form-check-label" for="inlineRadio1">Computer Institute</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineRadio" value="option2" name="Institute_type">
+                        <label class="form-check-label" for="inlineRadio2">Pre School	</label>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio" value="option2" name="Institute_type">
+                            <label class="form-check-label" for="inlineRadio2">
+                                Both
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <label for="inputAddress2" class="form-label">Area Where you want to Start your Institute/Pre School</label>
+                <input type="text" class="form-control" id="Institute_Pre_School" placeholder="" name="Institute_Pre_School">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress5" class="form-label">Present Job or Profession</label>
+                <input type="text" class="form-control" id="profession" name="Present_job_profession">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress5" class="form-label">Education Sector Experience (if any)</label>
+                <input type="text" class="form-control" id="Experience" name="Education_Sector_Experience">
+            </div>
+            <div class="col-12">
+                <label for="inputtext" class=" col-form-label">
+                    Your Comment or Query (if Any) :
+                </label>
+                <textarea class="form-control" id="Comment" name="Your_Comment_query" style="height: 80px"></textarea>
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="hidden" name="btntype" value="S" id="btn" />
+                <input type="hidden" name="Id" id="insId" />
+                <input type="submit" name="smtbut" value="Submit" id="sub" />
+                <input type="submit" name="update" value="Updated" style="display:none" id="up" />
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</main>
+
+
+<main id="main" class="main">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="col-lg-12">
+
+
+
+
+                <h5 class="card-title"></h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>mobile</th>
+                            <th>Email</th>
+                            <th>address</th>
+                            <th>YourEducation</th>
+                            <th>Education_Sector_Experience</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblInstitute">
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        GetAll();
+    })
+    function GetAll() {
+        $.ajax({
+            url: '/Admin/GetAll',
+            type: "GET",
+            success: function (data) {
+                $('#tblInstitute').html('');
+                $(data).each(function (i, item) {
+
+                    $('#tblInstitute').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.mobile + '</th><th>' + item.Email + '</th><th>' + item.Address + '</th><th>' + item.YourEducation + '</th><th>' + item.Education_Sector_Experience + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th></tr>');
+                })
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Edit(id) {
+        $.ajax({
+            url: '/Admin/Edit',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#id').val(data.id);
+                $('#instituteName').val(data.name);
+                $('#Mobile').val(data.mobile);
+                $('#SEmail').val(data.Email);
+                $('#Address').val(data.Address);
+                $('#YourEducation').val(data.YourEducation);
+                $('#inlineRadio').val(data.Institute_type);
+                $('#Institute_Pre_School').val(data.Institute_Pre_School);
+                $('#profession').val(data.Present_job_profession);
+                $('#Experience').val(data.Education_Sector_Experience);
+                $('#Comment').val(data.Your_Comment_query);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Delete(id) {
+        $.ajax({
+            url: '/Admin/Delete',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("deleted");
+            },
+            error: function () {
+
+                alert("not Deleted");
+            }
+        });
+    }
+
+
+
+
+    function UnApprove(id) {
+    var url = "/Institute/UpdateApprove";
+    $.ajax({
+        type: "POST",
+    url: url,
+    data: {Id: id },
+    success: function (flag) {
+            if (flag == true) {
+        alert("Un-Approved Sucessfully....");
+    location.reload();
+            }
+        },
+    error: function () {
+        alert("Un-Approved Failed....");
+        }
+
+    })
+}
+
+    function Approve(id) {
+    var url = "/Institute/UpdateUnApprove";
+    $.ajax({
+        type: "POST",
+    url: url,
+    data: {Id: id },
+    success: function (flag) {
+            if (flag == true) {
+        alert("Approved Sucessfully....");
+    location.reload();
+            }
+        },
+    error: function () {
+        alert("Approved Failed....");
+        }
+
+    })
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,328 @@
+﻿@model SharedModel.Models.Student
+@using SLEC.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+
+
+
+
+@{
+    DDL_Data ddl = new DDL_Data();
+    List<SelectListItem> lst = ddl.GetCourse();
+}
+
+<div class="card">
+    <main id="main" class="main">
+        <div class="card-body" id="DivForm">
+            @*<h5 class="card-title">ENROLLMENT FORM</h5>*@
+            <form class="row g-3" action="/Institute/Student_Registration" method="post">
+                <input type="hidden" class="form-control" id="id" name="id">
+                <div class="col-6">
+
+                    <label for="inputNanme4" class="form-label"> Name:</label>
+                    <input type="text" class="form-control" id="inputNanme4" name="name" required>
+
+                </div>
+
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Father Name:</label>
+                    <input type="text" class="form-control" id="fname" name="f_name" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Mother Name:</label>
+                    <input type="text" class="form-control" id="mname" name="m_name" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Class(last education)</label>
+                    <input type="text" class="form-control" id="Lstclass" name="lst_class" required>
+                </div>
+                <div class="col-6">
+                    <label for="Birthday" class="form-label">Birthday:</label>
+                    <input type="date" class="form-control" id="birthday" name="dob">
+                </div>
+
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Add_Course</label>
+                    <select class="form-select" id="validationCustom04" required="">
+
+
+                        @{
+                            foreach (SelectListItem item in lst)
+                            {
+                                if (Model != null)
+                                {
+                                    string select = item.Value == Model.id.ToString() ? "Selected=true" : "";
+                                    <option @select value="@item.Value">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Cast:</label>
+                    <input type="text" class="form-control" id="scast" name="cast" required>
+                </div>
+                <div class="col-6">
+
+
+
+                    <label for="inputNanme4" class="form-label">Religion:</label>
+                    <input type="text" class="form-control" id="relig" name="religion" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Full Address:</label>
+                    <input type="text" class="form-control" id="add" name="address" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputNumber" class="form-label">Aadhaar Number</label>
+                    <input type="number" class="form-control" id="aadhar" name="aadhar_NO" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputnumber" class="form-label">What'sApp Self</label>
+                    <input type="number" class="form-control" id="whats" name="whats_no_self" required>
+                </div>
+
+                <div class="col-6">
+                    <label for="inputnumber" class="form-label">What'sApp Father(home)</label>
+                    <input type="number" class="form-control" id="whatshome" name="whats_no_home" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputEmail" class="form-label">E_mail</label>
+                    <input type="email" class="form-control" id="Email" name="email" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="Password" class="form-control" id="inputPassword" name="password" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputnumber" class="form-label">Give Reference ID(if Any)</label>
+                    <input type="number" class="form-control" id="Refid" name="refid" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputnumber" class="form-label">Institute ID</label>
+                    <input type="number" class="form-control" id="inst" name="institute_id" required>
+                </div>
+                <div class="col-6">
+                    <label for="inputnumber" class="form-label">Year</label>
+                    <input type="number" class="form-control" id="Year" name="Year" required>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="images[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" id="img1" placeholder="Upload Photo" name="img_sing">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button"> Upload </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img_sing[]" class="file-upload-default" />
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" id="upimg" disabled placeholder="Upload Image" />
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button"> Upload </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+
+                @*<div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>*@
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="Delete()">Reset</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+   
+
+<main id="main" class="main">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="col-lg-12">
+
+
+
+
+                <h5 class="card-title"></h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>lst_class</th>
+                            <th>dob</th>
+                            <th>course_name</th>
+                            <th>cast</th>
+                            <th>religion</th>
+                            <th>aadhar_NO</th>
+                            <th>whats_no_self</th>
+                            <th>email</th>
+                            <th>refid</th>
+                            <th>isOnline</th>
+
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblStudent">
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        GetAll();
+    })
+
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Institute/GetAll',
+            type: "GET",
+            success: function (data) {
+                $('#tblStudent').html('');
+                $(data).each(function (i, item) {
+                    if (item.isOnline == '0' || item.isApprove=='0') {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">Send to Approvel</button></th></tr>');
+                    }
+                    else if (item.isOnline == '1' || item.isApprove == '0') {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">Processing</button></th></tr>');
+
+                    }
+                    else if (item.isOnline == '1' || item.isApprove == '1') {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">approved</button></th></tr>');
+
+                    }
+                    else {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">nothig</button></th></tr>');
+
+                    }
+                    
+                    
+                })
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+    function Edit(id) {
+        $.ajax({
+            url: '/Institute/Edit',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+
+                $('#id').val(data.id);
+                $('#inputNanme4').val(data.name);
+                $('#fname').val(data.f_name);
+                $('#mname').val(data.m_name);
+                $('#Lstclass').val(data.lst_class);
+                $('#birthday').val(data.dob);
+                $('#corsename').val(data.course_name);
+                $('#scast').val(data.cast);
+                $('#relig').val(data.religion);
+                $('#add').val(data.address);
+                $('#aadhar').val(data.aadhar_NO);
+                $('#whats').val(data.whats_no_self);
+                $('#whatshome').val(data.whats_no_home);
+                $('#Email').val(data.email);
+                $('#Refid').val(data.refid);
+                // $('#isOnline').val(data.isonline);
+                $('#inputNanme4').focus();
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Delete(id) {
+
+        $.ajax({
+            url: '/Institute/Delete',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+    
+
+    function SendforAppro(id, ids) {
+        debugger;
+        $.ajax({
+            url: '/Institute/SendForApprove',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#btn' + id).attr('disabled', true);
+                GetAll();
+                //alert(ids);
+               /* $('#'+id+'').attr('disabled', 'disabled');  "btn' + item.id + '"*/
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+  
+
+</script>
