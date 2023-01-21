@@ -1,0 +1,464 @@
+﻿@using SLEC.Models
+
+
+
+@{
+    ViewBag.Title = "Categorie";
+    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
+}
+
+<h2>Categorie</h2>
+
+
+@{
+    DDL_Data ddl = new DDL_Data();
+    List<SelectListItem> lst = ddl.GetCategorie();
+
+    List<SelectListItem> lst2 = ddl.GetCategoriedropdown();
+}
+
+
+<div class="card">
+    <main id="main" class="main">
+        <div class="card-body" id="DivForm">
+
+            <div class="row">
+
+                <div class="col-sm-4" id="satish" style="background-color:lightcyan;">
+                    <form class="row g-3" id="fid" method="post">
+                        <input type="hidden" id="id" name="id" />
+                        <h4>Type</h4>
+                        <input type="text" class="form-control" id="category_name" name="category_name" />
+                        <br />  <br /> 
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-2"><button type="button" class="btn btn-secondary" onclick="Save_Type()">Save</button></div>
+                            <div class="col-sm-5"></div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+                <div class="col-sm-4" style="background-color:beige;">
+                  
+                    <form class="row g-3" id="fcid" method="post">
+                        <h4>Category</h4>
+                        <input type="hidden" id="catid" name="id" />
+                        <select id="p_id" name="p_id" class="form-control">
+                            @{
+                                foreach (SelectListItem item in lst)
+                                {
+                                    if (Model != null)
+                                    {
+                                        string select = item.Value == Model.id.ToString() ? "Selected=true" : "";
+                                        <option @select value="@item.Value">@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        <br /><br />
+                        <input type="text" class="form-control" name="category_name" id="category_name01" />
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-2"><button type="button" class="btn btn-secondary" onclick="Save_Categorie()">Save</button></div>
+                            <div class="col-sm-5"></div>
+                        </div>
+                        
+                    </form>
+                 
+                </div>
+
+                <div class="col-sm-4" style="background-color:aqua;">
+                    <form class="row g-3" id="fdid" method="post">
+                        <h4>Sub_Category</h4>
+                        <input type="hidden" id="Subcatid" name="id" />
+                        <select id="s_id" name="htyfyguhjk" class="form-control" onchange="typechange()">
+                            @{
+                                foreach (SelectListItem item in lst)
+                                {
+                                    if (Model != null)
+                                    {
+                                        string select = item.Value == Model.id.ToString() ? "Selected=true" : "";
+                                        <option @select value="@item.Value">@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        <select id="p_01" name="p_id" class="form-control">
+                        </select>
+                        <br /><br />
+                        <input type="text" class="form-control" name="category_name" id="category_name02" /><br />
+
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-3"><button type="button" class="btn btn-secondary" onclick=" SubCategorie()">Save</button></div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                        
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<main id="main" class="main">
+    <div class="card">
+        <div class="card-body">
+<div class="row panel panel-body">
+            <div class="col-sm-4 alert alert-primary">
+                <h5 class="card-title">Type</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>name</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblType">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-4 alert alert-danger">
+                <h5 class="card-title">Categorie</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>name</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblCategorie">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-4 alert alert-warning">
+                <h5 class="card-title">SubCategorie</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>name</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblSubCategorie">
+                    </tbody>
+                </table>
+            </div>
+    </div>
+        </div>
+    </div>
+</main>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetAll();
+        GetAllCategorie();
+        GetAllSubCategorie();
+    })
+
+    function Save_Type() {
+        debugger;
+        var formdata = new FormData();
+        formdata = $('#fid').serialize();
+        $.ajax({
+            url: '/Exam/Save_Type',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+                    GetAll()
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Exam/GetAllType',
+            type: "GET",
+            success: function (data) {
+                $('#tblType').html('');
+                $(data).each(function (i, item) {
+                    $('#tblType').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th><th><a><button class="btn btn-warning" onclick="Edit(' + item.id + ')">Edit</button></a></th><th><a><button class="btn btn-danger" onclick="Delete(' + item.id + ')">Delete</button></a></th></tr>');
+                })
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Edit(id) {
+        $.ajax({
+            url: '/Exam/TypeEdit',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#id').val(data.id);
+                $('#category_name').val(data.category_name);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Delete(id) {
+
+        $.ajax({
+            url: '/Exam/TypeDelete',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+
+
+          //< ------Categorie---------->
+
+
+
+    function Save_Categorie() {
+        var formdata = new FormData();
+        formdata = $('#fcid').serialize();
+        $.ajax({
+            url: '/Exam/Save_Categorie',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+                    alert("Success");
+                    GetAllCategorie()
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+    function GetAllCategorie() {
+        $.ajax({
+            url: '/Exam/GetAll',
+            type: "GET",
+            success: function (data) {
+                //alert("ok");
+                $('#tblCategorie').html('');
+              $(data).each(function (i, item) {
+                  $('#tblCategorie').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th><th><a><button class="btn btn-warning" onclick="Editcategorie(' + item.id + ')">Edit</button></a></th><th><a><button class="btn btn-danger"onclick="Deletecategorie(' + item.id + ')">Delete</button></a></th></tr>');
+               })
+            },
+            error: function () {
+               alert("get category error");
+            }
+       });
+    }
+
+
+    function BindSubCategorieGetById(id) {
+        $.ajax({
+            url: '/Exam/BindSubCategorieGetById',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#id').val(data.id);
+               
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Editcategorie(id) {
+        $.ajax({
+            url: '/Exam/TypeEdit',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#catid').val(data.id);
+                $('#category_name01').val(data.category_name);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Deletecategorie(id) {
+
+        $.ajax({
+            url: '/Exam/TypeDelete',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+
+
+                              //< ------SubCategorie---------->
+
+    function SubCategorie() {
+        var formdata = new FormData();
+        formdata = $('#fdid').serialize();
+        $.ajax({
+            url: '/Exam/Save_SubCategorie',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+                    alert("Success");
+                    GetAllSubCategorie();
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+
+
+
+
+    function GetAllSubCategorie() {
+        $.ajax({
+            url: '/Exam/GetAllSubCategorie',
+            type: "GET",
+            success: function (data) {
+               // alert("ok");
+                $('#tblSubCategorie').html('');
+                $(data).each(function (i, item) {
+                    $('#tblSubCategorie').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th><th><a><button class="btn btn-warning" onclick="EditSubcategorie(' + item.id + ')">Edit</button></a></th><th><a><button class="btn btn-danger" onclick="DeleteSubcategorie(' + item.id + ')">Delete</button></a></th></tr>');
+                })
+            },
+            error: function () {
+                alert("get Subcategory error");
+            }
+        });
+    }
+
+
+    function EditSubcategorie(id) {
+        $.ajax({
+            url: '/Exam/TypeEdit',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#Subcatid').val(data.id);
+                $('#category_name02').val(data.category_name);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+
+
+
+
+    function typechange() {
+        $('#loader').show();
+        var cnge = $('#s_id').val();
+        $.ajax({
+            url: '/Exam/BindSubCategorieGetById',
+            type: 'POST',
+            data: { Id: cnge },
+            success: function (data) {
+                $('#loader').hide();
+                $('#p_01').empty();
+                $('#p_01').append('<option value="">select category</option>');
+                $(data).each(function (i, item) {
+                    $('#p_01').append('<option value="' + item.id + '">' + item.category_name + '</option>');
+                })
+
+
+            },
+            error: function () {
+                $('#loader').hide();
+                alert("error");
+            }
+        });
+    }
+
+
+
+
+    function DeleteSubcategorie(id) {
+
+        $.ajax({
+            url: '/Exam/TypeDelete',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+
+
+
+
+
+</script>

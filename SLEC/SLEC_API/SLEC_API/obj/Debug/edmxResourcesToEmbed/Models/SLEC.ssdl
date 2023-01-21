@@ -1,5 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="IWSSLSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Exam_Id" />
+    </Key>
+    <Property Name="Exam_Type" Type="varchar" MaxLength="50" />
+    <Property Name="Exam_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Exam_Title" Type="varchar" MaxLength="50" />
+    <Property Name="Categorie" Type="varchar" MaxLength="40" />
+    <Property Name="Sub_Categorie" Type="varchar" MaxLength="50" />
+    <Property Name="Num_Questions" Type="int" />
+    <Property Name="Is_Optional" Type="bit" />
+    <Property Name="Is_True_orFalse" Type="bit" />
+    <Property Name="Isactive" Type="bit" />
+    <Property Name="Isdeleted" Type="bit" />
+    <Property Name="Created_By" Type="int" />
+    <Property Name="Created_Date" Type="datetime" />
+    <Property Name="Updated_By" Type="int" />
+    <Property Name="Updated_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IWS_Categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p_id" Type="int" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="isactive" Type="bit" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="date" />
+    <Property Name="update_date" Type="date" />
+    <Property Name="update_by" Type="int" />
+    <Property Name="hiddenimgstr" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="IWS_Courses">
     <Key>
       <PropertyRef Name="id" />
@@ -96,6 +130,8 @@
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityContainer Name="IWSSLSEModelStoreContainer">
+    <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Categories" EntityType="Self.IWS_Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IWS_Courses" EntityType="Self.IWS_Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IWS_Institute" EntityType="Self.IWS_Institute" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IWS_Login" EntityType="Self.IWS_Login" Schema="dbo" store:Type="Tables" />

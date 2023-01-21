@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IWSSLSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="IWS_Categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p_id" Type="int" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="isactive" Type="bit" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="date" />
+    <Property Name="update_date" Type="date" />
+    <Property Name="update_by" Type="int" />
+    <Property Name="hiddenimgstr" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="IWS_Courses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="add_coures" Type="varchar" MaxLength="50" />
+    <Property Name="duration" Type="varchar" MaxLength="50" />
+    <Property Name="fees" Type="int" />
+    <Property Name="isactive" Type="bit" />
+    <Property Name="isdeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="IWS_Exam">
+    <Key>
+      <PropertyRef Name="Exam_Id" />
+    </Key>
+    <Property Name="Exam_Type" Type="varchar" MaxLength="50" />
+    <Property Name="Exam_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Exam_Title" Type="varchar" MaxLength="50" />
+    <Property Name="Categorie" Type="varchar" MaxLength="40" />
+    <Property Name="Sub_Categorie" Type="varchar" MaxLength="50" />
+    <Property Name="Num_Questions" Type="int" />
+    <Property Name="Isactive" Type="bit" />
+    <Property Name="Isdeleted" Type="bit" />
+    <Property Name="Created_By" Type="int" />
+    <Property Name="Created_Date" Type="datetime" />
+    <Property Name="Updated_By" Type="int" />
+    <Property Name="Updated_Date" Type="datetime" />
+    <Property Name="Is_Optional" Type="varchar" MaxLength="50" />
+    <Property Name="Is_True_orFalse" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IWS_Institute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="150" />
+    <Property Name="YourEducation" Type="varchar" MaxLength="100" />
+    <Property Name="Institute_type" Type="varchar" MaxLength="50" />
+    <Property Name="Present_job_profession" Type="varchar" MaxLength="50" />
+    <Property Name="Education_Sector_Experience" Type="varchar" MaxLength="50" />
+    <Property Name="Your_Comment_query" Type="varchar" MaxLength="250" />
+    <Property Name="createdone" Type="datetime" />
+    <Property Name="createdby" Type="varchar" MaxLength="50" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="updatedon" Type="datetime" />
+    <Property Name="opdatedby" Type="varchar" MaxLength="50" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Institute_Pre_School" Type="varchar" MaxLength="30" />
+    <Property Name="isapprove" Type="bit" />
+  </EntityType>
+  <EntityType Name="IWS_Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="password" Type="varchar" MaxLength="150" />
+    <Property Name="type" Type="varchar" MaxLength="200" />
+    <Property Name="isactive" Type="bit" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+    <Property Name="updated_by" Type="int" />
+    <Property Name="updated_date" Type="datetime" />
+    <Property Name="UserName" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="IWS_Score">
+    <Key>
+      <PropertyRef Name="Question_NO" />
+    </Key>
+    <Property Name="Exam_id" Type="int" />
+    <Property Name="Question_NO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="varchar" MaxLength="50" />
+    <Property Name="Opction1" Type="varchar" MaxLength="50" />
+    <Property Name="Opction2" Type="varchar" MaxLength="50" />
+    <Property Name="Opction3" Type="varchar" MaxLength="50" />
+    <Property Name="Opction4" Type="varchar" MaxLength="50" />
+    <Property Name="Answer" Type="varchar" MaxLength="30" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Created_Date" Type="date" />
+    <Property Name="Created_By" Type="int" />
+    <Property Name="Updated_By" Type="int" />
+    <Property Name="Updated_Date" Type="date" />
+    <Property Name="Id" Type="int" />
+  </EntityType>
+  <EntityType Name="IWS_Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="200" />
+    <Property Name="f_name" Type="varchar" MaxLength="200" />
+    <Property Name="m_name" Type="varchar" MaxLength="200" />
+    <Property Name="lst_class" Type="varchar" MaxLength="200" />
+    <Property Name="dob" Type="datetime" />
+    <Property Name="course_name" Type="varchar" MaxLength="100" />
+    <Property Name="cast" Type="varchar" MaxLength="100" />
+    <Property Name="religion" Type="varchar" MaxLength="100" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="aadhar_NO" Type="bigint" />
+    <Property Name="whats_no_self" Type="bigint" />
+    <Property Name="whats_no_home" Type="bigint" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="password" Type="varchar" MaxLength="150" />
+    <Property Name="refid" Type="bigint" />
+    <Property Name="images" Type="varchar" MaxLength="500" />
+    <Property Name="img_sing" Type="varchar" MaxLength="500" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="isactive" Type="bit" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+    <Property Name="updated_by" Type="int" />
+    <Property Name="updated_date" Type="datetime" />
+    <Property Name="institute_id" Type="int" />
+    <Property Name="isOnline" Type="bit" />
+    <Property Name="isApprove" Type="bit" />
+    <Property Name="Year" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityContainer Name="IWSSLSEModelStoreContainer">
+    <EntitySet Name="IWS_Categories" EntityType="Self.IWS_Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Courses" EntityType="Self.IWS_Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Exam" EntityType="Self.IWS_Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Institute" EntityType="Self.IWS_Institute" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Login" EntityType="Self.IWS_Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Score" EntityType="Self.IWS_Score" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IWS_Student" EntityType="Self.IWS_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

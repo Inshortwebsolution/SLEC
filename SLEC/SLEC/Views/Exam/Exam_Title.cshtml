@@ -1,0 +1,334 @@
+﻿
+@using SLEC.Models
+
+@{
+    ViewBag.Title = "Exam_Title";
+    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
+}
+@{
+    DDL_Data ddl = new DDL_Data();
+    List<SelectListItem> lst = ddl.GetCategorie();
+
+    List<SelectListItem> lst2 = ddl.GetCategoriedropdown();
+
+
+}
+
+
+
+
+
+<h2>Exam_Title</h2>
+
+
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+
+        <div class="card-body">
+
+            <form class="row" action="/Admin/" id="tid" method="post">
+                <input type="hidden" class="form-control" id="id" name="Exam_Id">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="inputname" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="Exam_Title">
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputname" class="form-label">Select Type</label>
+                    <select id="s_id" name="Exam_Type" class="form-control" onchange="typechange()">
+                        @{
+                            foreach (SelectListItem item in lst)
+                            {
+                                if (Model != null)
+                                {
+                                    string select = item.Value == Model.id.ToString() ? "Selected=true" : "";
+                                    <option @select value="@item.Value">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputName5" class="form-label">Select Categorie:</label>
+                    <select id="p_01" name="Categorie" class="form-control" onchange="categoerychange()">
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputName5" class="form-label">SubCategorie:</label>
+                    <select class="form-control" id="subid" name="Sub_Categorie">
+
+                        @*@{
+                            foreach (selectlistitem item in lst)
+                            {
+                                if (model != null)
+                                {
+                                    string select = item.value == model.id.tostring() ? "selected=true" : "";
+                                    <option @select value="@item.value">@item.text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.value">@item.text</option>
+                                }
+                            }
+                        }*@
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputname" class="form-label">num.of question:</label>
+                    <input type="number" class="form-control" id="Question" name="Num_Questions">
+                </div>
+                <div class="col-sm-4">
+                    <label for="input text">Question Type:</label>
+                    <select class="form-control" name="Question Type:">
+                        <option value="Is Optional">Is Optional </option>
+                        <option value="Is True,False">Is True,False</option>
+                    </select>
+
+                </div><br /><br />
+                <div class="row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-secondary  text-center" onclick="Save()">Save</button></div>
+                    <div class="col-sm-5"></div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <td>Sr.No</td>
+                        <td>Exam Title</td>
+                        <td>Select Type</td>
+                        <td>Select Categorie</td>
+                        <td>SubCategorie</td>
+                        <td>Num.of Question:</td>
+                        <td>Question Type</td>
+
+                        <td>Edit</td>
+                        <td>Delete</td>
+                        <td>Preview</td> 
+                    </tr>
+                </thead>
+                <tbody id="Examtitle">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="ExtralargeModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-danger-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Exam:- </h5><span id="examtitletext"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row" id="previewquestion">
+
+                
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        GetAll();
+    })
+
+
+    function Save() {
+        debugger;
+        var formdata = new FormData();
+        formdata = $('#tid').serialize();
+        $.ajax({
+            url: '/Exam/Save_Exam_Title',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+                   
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Exam/GetAll_Exam_title',
+            type: "get",
+            success: function (data) {
+                $('#Examtitle').html('');
+                $(data).each(function (i, item) {
+                    var exam = "";
+                    exam = "'" + item.Exam_Title +"'";
+                    $('#Examtitle').append('<tr><th>' + (i + 1) + '</th><th>' + item.Exam_Title + '</th><th>' + item.Exam_Type + '</th><th>' + item.Categorie + '</th><th>' + item.Sub_Categorie + '</th><th>' + item.Num_Questions + '</th><th>' + item.Is_Optional + '</th><th><a><button class="btn btn-warning" onclick="Edit(' + item.Exam_Id + ')">edit</button></a></th><th><a><button class="btn btn-danger" onclick="Delete(' + item.Exam_Id + ')">delete</button></a></th><th><a><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ExtralargeModal" onclick="Priview(' + item.Exam_Id + ',' + exam+')">Preview</button></a></th></tr>');
+                })
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+    function Priview(id,examtitle) {
+        $.ajax({
+            url: '/Exam/GetAll_Question_Preview',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                $('#previewquestion').html('');
+                $(data).each(function (i, item) {
+
+                    $('#previewquestion').append('<div class="col-sm-6 bg-primary-light"> <div class=""><b>' + item.Question + '?</b></div><br /> <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options" id="Opction1"> ' + item.Opction1 + '<span class="checkmark"></span></label><br/> <label class="options" id="Opction2"> ' + item.Opction2 + ' <span class="checkmark"></span> </label><br /> <label class="options" id="Opction3"> ' + item.Opction3 + '<span class="checkmark"></span> </label><br /> <label class="options" id="Opction4"> ' + item.Opction4 + ' <span class="checkmark"></span> </label><br /> <label class="Answer">Answer <input type="text" class="form-control" id="Answer" name="Answer" value="' + item.Answer + '"/> <span class=""></span> </label><br /> </div> </div>')
+                   
+                })
+                $('#examtitletext').text(examtitle);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+    }
+
+
+    function Edit(Exam_Id) {
+        $.ajax({
+            url: '/Exam/EditExam_Title',
+            type: 'POST',
+            data: { Id: Exam_Id },
+            success: function (data) {
+                alert("success");
+                $('#id').val(data.Exam_Id);
+                $('#title').val(data.Exam_Title);
+                $('#s_id').val(data.Exam_Type);
+                typechange(data.Categorie)
+               // $('#p_01').val(data.Categorie);
+                categoerychange(data.Sub_Categorie)
+                //$('#subid').val(data.Sub_Categorie);
+                $('#Question').val(data.Num_Questions);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+
+    function Delete(Exam_Id) {
+
+        $.ajax({
+            url: '/Exam/DeleteExam_Title',
+            type: 'POST',
+            data: { Id: Exam_Id },
+            success: function (data) {
+                alert("success");
+            },
+
+            error: function () {
+                alert("Not Deleted")
+            }
+        });
+    }
+
+
+    function typechange(id) {
+        $('#loader').show();
+        var cnge = $('#s_id').val();
+        $.ajax({
+            url: '/exam/bindsubcategoriegetbyid',
+            type: 'post',
+            data: { id: cnge },
+            success: function (data) {
+                $('#loader').hide();
+                $('#p_01').empty();
+                $('#p_01').append('<option value="">select category</option>');
+                $(data).each(function (i, item) {
+                    $('#p_01').append('<option value="' + item.id + '">' + item.category_name + '</option>');
+                    
+                    $('select[id^="p_01"]').val(id);
+                })
+            },
+            error: function () {
+                $('#loader').hide();
+                alert("error");
+            }
+        });
+    }
+
+    function categoerychange(id) {
+        $('#loader').show();
+        var cnge = $('#p_01').val();
+        $.ajax({
+            url: '/Exam/BindSubCategorieGetCatById',
+            type: 'POST',
+            data: { Id: cnge },
+            success: function (data) {
+                $('#loader').hide();
+                $('#subid').empty();
+                $('#subid').append('<option value="">select sub category</option>');
+                $(data).each(function (i, item) {
+                    $('#subid').append('<option value="' + item.id + '">' + item.category_name + '</option>');
+                  
+                    $('select[id^="subid"]').val(id);
+                   // $('#subid').val(id);
+                })
+
+            },
+            error: function () {
+                $('#loader').hide();
+                alert("error");
+            }
+        });
+        $('#loder').hide();
+    }
+
+
+
+
+
+    
+
+
+
+
+    
+
+
+   
+
+</script>

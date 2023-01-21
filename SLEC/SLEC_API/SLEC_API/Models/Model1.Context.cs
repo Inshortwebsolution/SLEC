@@ -25,9 +25,12 @@ namespace SLEC_API.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<IWS_Categories> IWS_Categories { get; set; }
         public virtual DbSet<IWS_Courses> IWS_Courses { get; set; }
+        public virtual DbSet<IWS_Exam> IWS_Exam { get; set; }
         public virtual DbSet<IWS_Institute> IWS_Institute { get; set; }
         public virtual DbSet<IWS_Login> IWS_Login { get; set; }
+        public virtual DbSet<IWS_Score> IWS_Score { get; set; }
         public virtual DbSet<IWS_Student> IWS_Student { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }

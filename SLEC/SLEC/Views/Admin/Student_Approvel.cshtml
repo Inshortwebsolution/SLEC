@@ -8,7 +8,7 @@
 
 
 <main id="main" class="main">
-<div class="card">
+<div class="card bg-warning-light">
     <div class="card-body">
 
         <div class="col-lg-12">
@@ -22,7 +22,6 @@
                     <tr>
                         <th>id</th>
                         <th>name</th>
-
                         <th>dob</th>
                         <th>course_name</th>
                         <th>religion</th>
@@ -41,8 +40,6 @@
                 <tbody id="tblStudent">
                 </tbody>
             </table>
-
-
         </div>
 
     </div>
@@ -53,24 +50,7 @@
     $(document).ready(function () {
         GetAll();
     })
-    //function UnApprove(id) {
-    //    var url = "/Home/UpdateApprovel";
-    //    $.ajax({
-    //        type: "POST",
-    //        url: url,
-    //        data: { Id: id },
-    //        success: function (flag) {
-    //            if (flag == true) {
-    //                alert("Un-Approved Sucessfully....");
-    //                location.reload();
-    //            }
-    //        },
-    //        error: function () {
-    //            alert("Un-Approved Failed....");
-    //        }
-
-    //    })
-    //}
+    
 
     function Approve(id) {
         var url = "/Admin/Student_Approvelbyid";
@@ -121,8 +101,7 @@
             success: function (data) {
                 $('#tblStudent').html('');
                 $(data).each(function (i, item) {
-                    // var datee = new Date(parseInt(item.dob.substr(6)));
-                    // datee.toDateString()
+                 
                     $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.institute_id + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th></a></th><th><a  onclick="Approve(' + item.id + ')"><button>Waitin For Approvel</button></a></th><th><a  onclick="UnApprove(' + item.id + ')"><button>UnApprove</button></a></th></tr>');
 
                        @{

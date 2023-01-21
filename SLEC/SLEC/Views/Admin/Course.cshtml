@@ -6,8 +6,8 @@
 
 <h2>Course</h2>
 <main id="main" class="main">
-<div class="card  " >
-    <div class="card-body "  id="DivForm"  >
+<div class="card">
+    <div class="card-body bg-primary-light"  id="DivForm"  >
         <form class="row g-3" action="/Admin/Course" method="post">
             <input type="hidden" class="form-control" id="id" name="id">
 
@@ -37,7 +37,7 @@
     </main>
 <main id="main" class="main">
 <div class="card">
-    <div class="card-body  ">
+    <div class="card-body bg-primary-light">
 
         <div class="col-lg-12">
 
@@ -81,7 +81,7 @@
             success: function (data) {
                 $('#tblCourse').html('');
                 $(data).each(function (i, item) {
-                    $('#tblCourse').append('<tr><th>' + (i + 1) + '</th><th>' + item.add_coures + '</th><th>' + item.duration + '</th><th>' + item.fees + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th></tr>');
+                    $('#tblCourse').append('<tr><th>' + (i + 1) + '</th><th>' + item.add_coures + '</th><th>' + item.duration + '</th><th>' + item.fees + '</th><th><a  onclick="Edit(' + item.id + ')"><button class="btn btn-warning">Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button class="btn btn-danger">Delete</button></a></th></tr>');
                 })
 
             },

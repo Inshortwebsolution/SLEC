@@ -101,5 +101,41 @@
     <EntitySet Name="IWS_Login" EntityType="Self.IWS_Login" />
     <EntitySet Name="IWS_Student" EntityType="Self.IWS_Student" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Exams" EntityType="IWSSLSEModel.Exam" />
+    <EntitySet Name="IWS_Categories" EntityType="IWSSLSEModel.IWS_Categories" />
   </EntityContainer>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Exam_Id" />
+    </Key>
+    <Property Name="Exam_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Exam_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Exam_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Categorie" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Sub_Categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Num_Questions" Type="Int32" />
+    <Property Name="Is_Optional" Type="Boolean" />
+    <Property Name="Is_True_orFalse" Type="Boolean" />
+    <Property Name="Isactive" Type="Boolean" />
+    <Property Name="Isdeleted" Type="Boolean" />
+    <Property Name="Created_By" Type="Int32" />
+    <Property Name="Created_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="Int32" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="IWS_Categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_id" Type="Int32" />
+    <Property Name="category_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="0" />
+    <Property Name="update_date" Type="DateTime" Precision="0" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="hiddenimgstr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

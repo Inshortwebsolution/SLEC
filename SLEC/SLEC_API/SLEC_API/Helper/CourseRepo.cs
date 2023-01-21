@@ -19,8 +19,6 @@ namespace SLEC_API.Helper
             bool n = false;
             try
             {
-
-
                 var item = db.IWS_Courses.Where(x => x.id == id).FirstOrDefault();
                 item.isdeleted = true;
 

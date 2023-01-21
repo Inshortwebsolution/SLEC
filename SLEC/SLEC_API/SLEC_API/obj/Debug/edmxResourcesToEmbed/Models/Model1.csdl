@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IWSSLSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="IWS_Categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_id" Type="Int32" />
+    <Property Name="category_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="0" />
+    <Property Name="update_date" Type="DateTime" Precision="0" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="hiddenimgstr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IWS_Courses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="add_coures" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fees" Type="Int32" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="isdeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="IWS_Exam">
+    <Key>
+      <PropertyRef Name="Exam_Id" />
+    </Key>
+    <Property Name="Exam_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Exam_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Exam_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Categorie" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Sub_Categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Num_Questions" Type="Int32" />
+    <Property Name="Isactive" Type="Boolean" />
+    <Property Name="Isdeleted" Type="Boolean" />
+    <Property Name="Created_By" Type="Int32" />
+    <Property Name="Created_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_By" Type="Int32" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Optional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Is_True_orFalse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IWS_Institute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="YourEducation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Institute_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Present_job_profession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Education_Sector_Experience" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Your_Comment_query" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="createdone" Type="DateTime" Precision="3" />
+    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="updatedon" Type="DateTime" Precision="3" />
+    <Property Name="opdatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Institute_Pre_School" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="isapprove" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="IWS_Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="updated_by" Type="Int32" />
+    <Property Name="updated_date" Type="DateTime" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IWS_Score">
+    <Key>
+      <PropertyRef Name="Question_NO" />
+    </Key>
+    <Property Name="Exam_id" Type="Int32" />
+    <Property Name="Question_NO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opction1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opction2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opction3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opction4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Answer" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="Created_Date" Type="DateTime" Precision="0" />
+    <Property Name="Created_By" Type="Int32" />
+    <Property Name="Updated_By" Type="Int32" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="0" />
+    <Property Name="Id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="IWS_Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="f_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="m_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="lst_class" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="3" />
+    <Property Name="course_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cast" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="religion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="aadhar_NO" Type="Int64" />
+    <Property Name="whats_no_self" Type="Int64" />
+    <Property Name="whats_no_home" Type="Int64" />
+    <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="refid" Type="Int64" />
+    <Property Name="images" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="img_sing" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="isactive" Type="Boolean" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="updated_by" Type="Int32" />
+    <Property Name="updated_date" Type="DateTime" Precision="3" />
+    <Property Name="institute_id" Type="Int32" />
+    <Property Name="isOnline" Type="Boolean" />
+    <Property Name="isApprove" Type="Boolean" />
+    <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="IWSSLSEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="IWS_Categories" EntityType="Self.IWS_Categories" />
+    <EntitySet Name="IWS_Courses" EntityType="Self.IWS_Courses" />
+    <EntitySet Name="IWS_Exam" EntityType="Self.IWS_Exam" />
+    <EntitySet Name="IWS_Institute" EntityType="Self.IWS_Institute" />
+    <EntitySet Name="IWS_Login" EntityType="Self.IWS_Login" />
+    <EntitySet Name="IWS_Score" EntityType="Self.IWS_Score" />
+    <EntitySet Name="IWS_Student" EntityType="Self.IWS_Student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+  </EntityContainer>
+</Schema>

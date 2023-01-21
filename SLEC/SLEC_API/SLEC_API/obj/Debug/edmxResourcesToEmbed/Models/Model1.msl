@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IWSSLSEModelStoreContainer" CdmEntityContainer="IWSSLSEEntities">
+    <EntitySetMapping Name="IWS_Categories">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Categories">
+        <MappingFragment StoreEntitySet="IWS_Categories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="p_id" ColumnName="p_id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="hiddenimgstr" ColumnName="hiddenimgstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Courses">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Courses">
+        <MappingFragment StoreEntitySet="IWS_Courses">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="add_coures" ColumnName="add_coures" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="fees" ColumnName="fees" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Exam">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Exam">
+        <MappingFragment StoreEntitySet="IWS_Exam">
+          <ScalarProperty Name="Exam_Type" ColumnName="Exam_Type" />
+          <ScalarProperty Name="Exam_Id" ColumnName="Exam_Id" />
+          <ScalarProperty Name="Exam_Title" ColumnName="Exam_Title" />
+          <ScalarProperty Name="Categorie" ColumnName="Categorie" />
+          <ScalarProperty Name="Sub_Categorie" ColumnName="Sub_Categorie" />
+          <ScalarProperty Name="Num_Questions" ColumnName="Num_Questions" />
+          <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+          <ScalarProperty Name="Isdeleted" ColumnName="Isdeleted" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Optional" ColumnName="Is_Optional" />
+          <ScalarProperty Name="Is_True_orFalse" ColumnName="Is_True_orFalse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Institute">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Institute">
+        <MappingFragment StoreEntitySet="IWS_Institute">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="YourEducation" ColumnName="YourEducation" />
+          <ScalarProperty Name="Institute_type" ColumnName="Institute_type" />
+          <ScalarProperty Name="Present_job_profession" ColumnName="Present_job_profession" />
+          <ScalarProperty Name="Education_Sector_Experience" ColumnName="Education_Sector_Experience" />
+          <ScalarProperty Name="Your_Comment_query" ColumnName="Your_Comment_query" />
+          <ScalarProperty Name="createdone" ColumnName="createdone" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="updatedon" ColumnName="updatedon" />
+          <ScalarProperty Name="opdatedby" ColumnName="opdatedby" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Institute_Pre_School" ColumnName="Institute_Pre_School" />
+          <ScalarProperty Name="isapprove" ColumnName="isapprove" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Login">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Login">
+        <MappingFragment StoreEntitySet="IWS_Login">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Score">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Score">
+        <MappingFragment StoreEntitySet="IWS_Score">
+          <ScalarProperty Name="Exam_id" ColumnName="Exam_id" />
+          <ScalarProperty Name="Question_NO" ColumnName="Question_NO" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Opction1" ColumnName="Opction1" />
+          <ScalarProperty Name="Opction2" ColumnName="Opction2" />
+          <ScalarProperty Name="Opction3" ColumnName="Opction3" />
+          <ScalarProperty Name="Opction4" ColumnName="Opction4" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IWS_Student">
+      <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Student">
+        <MappingFragment StoreEntitySet="IWS_Student">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="f_name" ColumnName="f_name" />
+          <ScalarProperty Name="m_name" ColumnName="m_name" />
+          <ScalarProperty Name="lst_class" ColumnName="lst_class" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="cast" ColumnName="cast" />
+          <ScalarProperty Name="religion" ColumnName="religion" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="aadhar_NO" ColumnName="aadhar_NO" />
+          <ScalarProperty Name="whats_no_self" ColumnName="whats_no_self" />
+          <ScalarProperty Name="whats_no_home" ColumnName="whats_no_home" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="refid" ColumnName="refid" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="img_sing" ColumnName="img_sing" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+          <ScalarProperty Name="institute_id" ColumnName="institute_id" />
+          <ScalarProperty Name="isOnline" ColumnName="isOnline" />
+          <ScalarProperty Name="isApprove" ColumnName="isApprove" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IWSSLSEModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

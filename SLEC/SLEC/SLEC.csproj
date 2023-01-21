@@ -123,6 +123,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstituteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\gggg.sql" />
     <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\img\apple-touch-icon.png" />
     <Content Include="Content\assets\img\card.jpg" />
@@ -1019,10 +1021,13 @@
     <Content Include="Views\Institute\Index.cshtml" />
     <Content Include="Views\Institute\Student_Mark.cshtml" />
     <Content Include="Views\Institute\Institute_Profile.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\Categorie.cshtml" />
+    <Content Include="Views\Exam\Exams.cshtml" />
+    <Content Include="Views\Exam\Exam_Title.cshtml" />
+    <Content Include="Views\Exam\Exam_Question.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,229 @@
+﻿
+@using SLEC.Models
+@{
+    ViewBag.Title = "Exam_Question";
+    Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
+}
+
+@{
+    DDL_Data ddl = new DDL_Data();
+    List<SelectListItem> lst = ddl.GetExam_Id();
+
+
+}
+
+
+<h2>Exam_Question</h2>
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+
+        <div class="card-body">
+
+            <form class="row" action="/Admin/" id="ESid" method="post">
+
+                <input type="hidden" id="Question_NO" name="Question_NO" />
+
+
+                <div class="6">
+                    <label for="inputName5" class="form-label">Exam_Id:</label>
+                    <select class="form-control" id="Examid" name="Exam_id">
+
+                        @{
+                            foreach (SelectListItem item in lst)
+                            {
+                                if (Model != null)
+                                {
+                                    string select = item.Value == Model.id.ToString() ? "Selected=true" : "";
+                                    <option @select value="@item.Value">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                        }
+
+
+                    </select>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label for="inputname" class="form-label">Question</label>
+                    <input type="text" class="form-control" id="Question" name="Question">
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label for=" inputname" class="form-label">Option1</label>
+                    <input type="text" class="form-control" id="Opction1" name="Opction1" />
+                </div>
+                <div class="col-sm-6">
+                    <label for=" inputname" class="form-label">Option2</label>
+                    <input type="text" class="form-control" id="Opction2" name="Opction2" />
+                </div>
+                <div class="col-sm-6">
+                    <label for=" inputname" class="form-label">Option3</label>
+                    <input type="text" class="form-control" id="Opction3" name="Opction3" />
+                </div>
+                <div class="col-sm-6">
+                    <label for=" inputname" class="form-label">Option4</label>
+                    <input type="text" class="form-control" id="Opction4" name="Opction4" />
+                </div>
+                <div class="col-sm-6">
+                    <label for=" inputname" class="form-label">Answer</label>
+                    <input type="text" class="form-control" id="Answer" name="Answer" />
+                </div>
+
+                <br /><br /><br />
+
+                <div class="row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-secondary  text-center" onclick="Save_Score()">Save</button>
+                        
+                    </div>
+
+                    <div class="col-sm-5"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr.no</th>
+                        <td>Exam Id</td>
+                        <td>Question No</td>
+                        <td>Question</td>
+                        <td>Option1</td>
+                        <td>Option2</td>
+                        <td>Option3</td>
+                        <td>Option4</td>
+                        <td>Answer</td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody id="tblScore">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        GetAll();
+    })
+ 
+
+
+    function Save_Score() {
+        var formdata = new FormData();
+        formdata = $('#ESid').serialize();
+        $.ajax({
+            url: '/Exam/SaveExam_Question',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Exam/GetAll_Question',
+            type: "GET",
+            success: function (data) {
+                $('#tblScore').html('');
+                $(data).each(function (i, item) {
+
+                    $('#tblScore').append('<tr><th>' + (i + 1) + '</th><th>' + item.Exam_id + '</th><th>' + item.Question_NO + '</th><th>' + item.Question + '</th><th>' + item.Opction1 + '</th><th>' + item.Opction2 + '</th><th>' + item.Opction3 + '</th><th>' + item.Opction4 + '</th><th>' + item.Answer + '</th><th><button class="btn btn-warning" onclick="Edit(' + item.Question_NO + ')" >Edit</button></th><th><a  onclick="Delete(' + item.Question_NO + ')"><button class="btn btn-danger">Delete</button></a></th></tr>');
+                })
+
+            },
+            error: function () {
+                alert("error get all");
+            }
+        });
+    }
+
+
+
+    function Edit(id) {
+        $.ajax({
+            url: '/Exam/Edit_ExamQuestion',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("success");
+                $('#Question_NO').val(data.Question_NO);
+                $('#Examid').val(data.Exam_id);
+                $('#Question').val(data.Question);
+                $('#Opction1').val(data.Opction1);
+                $('#Opction2').val(data.Opction2);
+                $('#Opction3').val(data.Opction3);
+                $('#Opction4').val(data.Opction4);
+                $('#Answer').val(data.Answer);
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function Delete(id) {
+        $.ajax({
+            url: '/Exam/Delete_ExamQuestion',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                alert("deleted");
+            },
+            error: function () {
+
+                alert("not Deleted");
+            }
+        });
+    }
+
+
+
+
+</script>
+
+
+
+
+
+
+

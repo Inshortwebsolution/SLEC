@@ -20,8 +20,9 @@
     List<SelectListItem> lst = ddl.GetCourse();
 }
 
-<div class="card">
-    <main id="main" class="main">
+<main id="main" class="main">
+    <div class="card bg-success-light">
+
         <div class="card-body" id="DivForm">
             @*<h5 class="card-title">ENROLLMENT FORM</h5>*@
             <form class="row g-3" action="/Institute/Student_Registration" method="post">
@@ -51,8 +52,8 @@
                 </div>
 
                 <div class="col-6">
-                    <label for="inputNanme4" class="form-label">Add_Course</label>
-                    <select class="form-select" id="validationCustom04" required="">
+                    <label for="inputNanme4" class="form-label">Course_Name</label>
+                    <select class="form-select" id="coursename" name="course_name" required>
 
 
                         @{
@@ -125,7 +126,7 @@
                         <label>File upload</label>
                         <input type="file" name="images[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" id="img1" placeholder="Upload Photo" name="img_sing">
+                            <input type="text" class="form-control file-upload-info" id="img1" placeholder="Upload Photo" name="images">
                             <span class="input-group-append">
                                 <button class="file-upload-browse btn btn-primary" type="button"> Upload </button>
                             </span>
@@ -137,7 +138,7 @@
                         <label>File upload</label>
                         <input type="file" name="img_sing[]" class="file-upload-default" />
                         <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" id="upimg" disabled placeholder="Upload Image" />
+                            <input type="text" class="form-control file-upload-info" id="img2" placeholder="Upload Image" name="img_sing" />
                             <span class="input-group-append">
                                 <button class="file-upload-browse btn btn-primary" type="button"> Upload </button>
                             </span>
@@ -149,8 +150,8 @@
                 <br />
 
                 @*<div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>*@
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>*@
                 <div class="col-6">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -166,12 +167,13 @@
                 </div>
             </form>
         </div>
-    </main>
-</div>
-   
+
+    </div>
+</main>
+
 
 <main id="main" class="main">
-    <div class="card">
+    <div class="card bg-success-light">
         <div class="card-body">
 
             <div class="col-lg-12">
@@ -228,8 +230,8 @@
             success: function (data) {
                 $('#tblStudent').html('');
                 $(data).each(function (i, item) {
-                    if (item.isOnline == '0' || item.isApprove=='0') {
-                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">Send to Approvel</button></th></tr>');
+                    if (item.isOnline == '0' || item.isApprove == '0') {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button  class="btn btn-warning">Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button class="btn btn-danger">Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">Send to Approvel</button class="btn btn-green "></th></tr>');
                     }
                     else if (item.isOnline == '1' || item.isApprove == '0') {
                         $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">Processing</button></th></tr>');
@@ -243,8 +245,8 @@
                         $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button>Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button>Delete</button></a></th><th><button id="btn' + item.id + '" onclick="SendforAppro(' + item.id + ' )">nothig</button></th></tr>');
 
                     }
-                    
-                    
+
+
                 })
 
             },
@@ -269,7 +271,7 @@
                 $('#mname').val(data.m_name);
                 $('#Lstclass').val(data.lst_class);
                 $('#birthday').val(data.dob);
-                $('#corsename').val(data.course_name);
+                $('#coursename').val(data.course_name);
                 $('#scast').val(data.cast);
                 $('#relig').val(data.religion);
                 $('#add').val(data.address);
@@ -302,7 +304,7 @@
             }
         });
     }
-    
+
 
     function SendforAppro(id, ids) {
         debugger;
@@ -315,14 +317,15 @@
                 $('#btn' + id).attr('disabled', true);
                 GetAll();
                 //alert(ids);
-               /* $('#'+id+'').attr('disabled', 'disabled');  "btn' + item.id + '"*/
             },
-
             error: function () {
                 alert("Not Deleted")
             }
         });
     }
-  
+
+
+
+
 
 </script>
