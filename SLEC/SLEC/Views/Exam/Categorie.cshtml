@@ -314,12 +314,13 @@
 
     function Editcategorie(id) {
         $.ajax({
-            url: '/Exam/TypeEdit',
+            url: '/Exam/EditCat',
             type: 'POST',
             data: { Id: id },
             success: function (data) {
                 alert("success");
                 $('#catid').val(data.id);
+                $('#p_id').val(data.p_id);
                 $('#category_name01').val(data.category_name);
             },
             error: function () {
@@ -395,12 +396,19 @@
 
     function EditSubcategorie(id) {
         $.ajax({
-            url: '/Exam/TypeEdit',
+            url: '/Exam/EditSubCat',
             type: 'POST',
             data: { Id: id },
             success: function (data) {
-                alert("success");
-                $('#Subcatid').val(data.id);
+                // alert("success");
+                //$('select[id^="Subcatid"]').val(data.id);
+                //$('select[id^="s_id"] option[value=' + data.htyfyguhjk + ']').attr("selected", "selected");
+                alert("ghjhj" + data.htyfyguhjk);
+                $('#s_id option[value=' + data.htyfyguhjk+']').attr("selected", "selected");
+                //$('#Subcatid').val(data.id);
+               // $('s_id').val(data.htyfyguhjk);
+                typechange(data.p_id);
+                //$('#p_01').val();
                 $('#category_name02').val(data.category_name);
             },
             error: function () {
@@ -414,9 +422,11 @@
 
 
 
-    function typechange() {
+    function typechange(data) {
         $('#loader').show();
+        alert(data);
         var cnge = $('#s_id').val();
+        alert(cnge);
         $.ajax({
             url: '/Exam/BindSubCategorieGetById',
             type: 'POST',
@@ -428,6 +438,10 @@
                 $(data).each(function (i, item) {
                     $('#p_01').append('<option value="' + item.id + '">' + item.category_name + '</option>');
                 })
+                if (data !== "") {
+                    $('#p_01 option[value="'+data+'"]').attr("selected", "selected");
+                }
+                //$('#p_01').val(data);
 
 
             },

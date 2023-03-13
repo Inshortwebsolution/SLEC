@@ -33,5 +33,9 @@ namespace SLEC_API.Models
         public virtual DbSet<IWS_Score> IWS_Score { get; set; }
         public virtual DbSet<IWS_Student> IWS_Student { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<IWS_Payment> IWS_Payment { get; set; }
+        public virtual DbSet<IWS_Exam_login> IWS_Exam_login { get; set; }
+        public virtual DbSet<IWS_Exam_Histroy> IWS_Exam_Histroy { get; set; }
+        public virtual DbSet<IWS_tbl_Answer> IWS_tbl_Answer { get; set; }
     }
 }

@@ -80,18 +80,22 @@ namespace SLEC_API.Helper
             bool result = false;
             try
             {
+                Random obj = new Random();
+                var id = obj.Next(100, 9999);
                 string json = JsonConvert.SerializeObject(student);
                 IWS_Student iWS_Student = JsonConvert.DeserializeObject<IWS_Student>(json);
                 iWS_Student.isactive = true;
                 iWS_Student.isdeleted = false;
+                iWS_Student.userid = id;
                 iWS_Student.created_date = DateTime.Now;
                 db.IWS_Student.Add(iWS_Student);
+                
+              
                 IWS_Login iWS_Login = new IWS_Login();
-                //iWS_Login.UserName1 = student.email;
-                iWS_Login.type = "Student";
-                Random obj = new Random();
-                var id = obj.Next(100, 9999);
                 iWS_Login.userid = id;
+                iWS_Login.UserName = student.email;
+                iWS_Login.created_date = student.created_date;
+                iWS_Login.type = "Student";
                 iWS_Login.password = "INSHORT" + id;
                 iWS_Login.isactive = false;
                 db.IWS_Login.Add(iWS_Login);
@@ -239,6 +243,53 @@ namespace SLEC_API.Helper
                 var item = db.IWS_Student.Where(x => x.id == id).FirstOrDefault();
 
                 item.Status = status;
+                db.SaveChanges();
+
+                result = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+        }
+
+        public Student GetDetailByEmail(string email)
+        {
+            Student student = new Student();
+            IWS_Student iwsstudent = new IWS_Student();
+            iwsstudent = db.IWS_Student.Where(x => x.email == email && x.isactive == true && x.isdeleted == false).FirstOrDefault();
+            string json = JsonConvert.SerializeObject(iwsstudent);
+            student = JsonConvert.DeserializeObject<Student>(json);
+            return student;
+        }
+
+        public Student GetDetailBy_userid(int userid)
+        {
+
+            Student student = new Student();
+            IWS_Student iwsstudent = new IWS_Student();
+            iwsstudent = db.IWS_Student.Where(x => x.userid == userid && x.isactive == true && x.isdeleted == false).FirstOrDefault();
+            string json = JsonConvert.SerializeObject(iwsstudent);
+            student = JsonConvert.DeserializeObject<Student>(json);
+            return student;
+        }
+
+        public bool RequestExam(int id)
+        {
+            IWS_Exam_login exam = new IWS_Exam_login();
+            bool result = false;
+            try
+            {
+                Random obj = new Random();
+                var Userid = obj.Next(100, 9999);
+                exam.User_Id = Userid;
+                exam.Password = "INSHORT" + Userid;
+                exam.Student_Id = id;
+                exam.IsActive = false;
+                exam.IsDeleted = false;
+                db.IWS_Exam_login.Add(exam);
                 db.SaveChanges();
 
                 result = true;

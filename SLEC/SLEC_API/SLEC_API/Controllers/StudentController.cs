@@ -349,6 +349,92 @@ namespace SLEC_API.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
+
+        [Route("api/Student/GetStudentDetailBy_Email")]
+        [HttpGet]
+        public HttpResponseMessage GetStudentDetailBy_Email(string email)
+        {
+            Response response = new Response();
+            Student student = new Student();
+            try
+            {
+
+                student = Sto.GetDetailByEmail(email);
+                if (student != null)
+                {
+                    response.status = true;
+                    response.data = student;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        [Route("api/Student/GetStudentDetailBy_userid")]
+        [HttpGet]
+        public HttpResponseMessage GetStudentDetailBy_userid(int userid)
+        {
+            Response response = new Response();
+            Student student = new Student();
+            try
+            {
+
+                student = Sto.GetDetailBy_userid(userid);
+                if (student != null)
+                {
+                    response.status = true;
+                    response.data = student;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        [Route("api/Student/RequestFor_Exam")]
+        [HttpPost]
+        public HttpResponseMessage RequestFor_Exam(int id)
+        {
+            Response response = new Response();
+            try
+            {
+                bool n = Sto.RequestExam(id);
+                if (n)
+                {
+                    response.status = true;
+                    response.data = n;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
     }
 }
 

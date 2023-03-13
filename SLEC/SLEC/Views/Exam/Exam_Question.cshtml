@@ -169,6 +169,7 @@
                     $('#tblScore').append('<tr><th>' + (i + 1) + '</th><th>' + item.Exam_id + '</th><th>' + item.Question_NO + '</th><th>' + item.Question + '</th><th>' + item.Opction1 + '</th><th>' + item.Opction2 + '</th><th>' + item.Opction3 + '</th><th>' + item.Opction4 + '</th><th>' + item.Answer + '</th><th><button class="btn btn-warning" onclick="Edit(' + item.Question_NO + ')" >Edit</button></th><th><a  onclick="Delete(' + item.Question_NO + ')"><button class="btn btn-danger">Delete</button></a></th></tr>');
                 })
 
+
             },
             error: function () {
                 alert("error get all");

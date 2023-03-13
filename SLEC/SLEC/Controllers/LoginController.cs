@@ -27,15 +27,24 @@ namespace SLEC.Controllers
             {
                 string url = apiurl + "/Login/Emaillogin";
                 Response responseResult = api.Post(url, login);
-                Login lgn =JsonConvert.DeserializeObject<Login>(responseResult.data.ToString());
+                Login lgn = JsonConvert.DeserializeObject<Login>(responseResult.data.ToString());
                 if (responseResult.status)
                 {
                     if (responseResult.status)
                     {
                         if (lgn.type == "Student")
                         {
-                            Session["UserDetails"] = lgn;
-                            Response.Redirect("/Admin/Student_Dashboard");
+                            string getuserId = apiurl + "Student/GetStudentDetailBy_Email?email=" + login.username + "";
+                             responseResult = api.Get(getuserId);
+                            Student userid = JsonConvert.DeserializeObject<Student>(responseResult.data.ToString());
+                            Session["Student_Detail"] = userid.userid;
+                            Session["Student_Name"] = userid.name;
+                            Session["Student_Id"] = userid.id;
+                            Session["Student_Father"] = userid.f_name;
+                            Session["Student_Mobile"] = userid.whats_no_self;
+                            Session["Student_DOB"] = userid.dob;
+                            Session["Student_Email"] = userid.email;
+                            Response.Redirect("/Student_/Profile");
                         }
                         else if (lgn.type == "Institute")
                         {
@@ -60,7 +69,44 @@ namespace SLEC.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public JsonResult Exam_Login(ExamLogin examLogin)
+        {
+            bool status = false;
+            Response responseToView = new Response();
+            try
+            {
+                string url = apiurl + "/Login/ExamLogin";
+                Response responseResult = api.Post(url, examLogin);
+                ExamLogin lgn = JsonConvert.DeserializeObject<ExamLogin>(responseResult.data.ToString());
+                if (responseResult.status)
+                {
+                    if (responseResult.status)
+                    {
+                          
+                        ExamLogin User_Id = JsonConvert.DeserializeObject<ExamLogin>(responseResult.data.ToString());
+                        Session["Exam_Detail"] =User_Id.User_Id;
+                        status = true;
+
+                        //return RedirectToAction("Exam_Manage", "Exam_Profile");
+                        //Response.Redirect("/Exam_Manage/Exam_Profile");
+                    }
+                }
+                else { responseToView.status = false; responseToView.error = responseResult.error; }
+            }
+            catch (Exception ex)
+            {
+                responseToView.status = false;
+                responseToView.error = "Server Error";
+            }
+            return Json(status,JsonRequestBehavior.AllowGet);
+        }
     }
 
-    
+
 }
+
+
+    
+

@@ -4,6 +4,7 @@ using SLEC_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -84,18 +85,47 @@ namespace SLEC.Controllers
         public JsonResult Save_Categorie(Categorie categorie)
         {
             Response responseToView = new Response();
-            string url = apiurl + "Categorie/SaveCategorie";
             try
             {
-                Response responseResult = api.Post(url, categorie);
-                if (responseResult.status)
+                if (categorie != null)
                 {
-                    responseToView.status = true;
-                    responseToView.data = responseResult.data;
+                    string url = apiurl + "Categorie/SaveCategorie";
+                    string updateurl = apiurl + "Categorie/UpdateCategory";
 
+                    if (categorie.id > 0)
+                    {
+                        categorie.update_by = 2;
+                        categorie.update_date = DateTime.Now;
+                        categorie.isactive = true;
+                        categorie.isdeleted = false;
+
+                        Response responseResult = api.Post(updateurl, categorie);
+                        if (responseResult.status)
+                        {
+                            responseToView.status = true;
+                            responseToView.data = responseResult.data;
+
+                        }
+                        else { responseToView.status = false; responseToView.error = responseResult.error; }
+                    }
+                    else
+                    {
+                        categorie.update_by = 0;
+                        categorie.update_date = DateTime.Now;
+                        categorie.isactive = true;
+                        categorie.isdeleted = false;
+                        Response responseResult = api.Post(url, categorie);
+                        if (responseResult.status)
+                        {
+                            responseToView.status = true;
+                            responseToView.data = responseResult.data;
+
+                        }
+                        else { responseToView.status = false; responseToView.error = responseResult.error; }
+                    }
                 }
-                else { responseToView.status = false; responseToView.error = responseResult.error; }
             }
+
             catch (Exception ex)
             {
 
@@ -144,17 +174,46 @@ namespace SLEC.Controllers
         public JsonResult Save_SubCategorie(Categorie categorie)
         {
             Response responseToView = new Response();
-            string url = apiurl + "Categorie/Save_SubCategorie";
+           
             try
             {
-                Response responseResult = api.Post(url, categorie);
-                if (responseResult.status)
+                if (categorie != null)
                 {
-                    responseToView.status = true;
-                    responseToView.data = responseResult.data;
+                    string url = apiurl + "Categorie/Save_SubCategorie";
+                    string updateurl = apiurl + "Categorie/UpdateSubCategory";
 
+                    if (categorie.id > 0)
+                    {
+                        categorie.update_by = 2;
+                        categorie.update_date = DateTime.Now;
+                        categorie.isactive = true;
+                        categorie.isdeleted = false;
+
+                        Response responseResult = api.Post(updateurl, categorie);
+                        if (responseResult.status)
+                        {
+                            responseToView.status = true;
+                            responseToView.data = responseResult.data;
+
+                        }
+                        else { responseToView.status = false; responseToView.error = responseResult.error; }
+                    }
+                    else
+                    {
+                        categorie.update_by = 0;
+                        categorie.update_date = DateTime.Now;
+                        categorie.isactive = true;
+                        categorie.isdeleted = false;
+                        Response responseResult = api.Post(url, categorie);
+                        if (responseResult.status)
+                        {
+                            responseToView.status = true;
+                            responseToView.data = responseResult.data;
+
+                        }
+                        else { responseToView.status = false; responseToView.error = responseResult.error; }
+                    }
                 }
-                else { responseToView.status = false; responseToView.error = responseResult.error; }
             }
             catch (Exception ex)
             {
@@ -251,6 +310,9 @@ namespace SLEC.Controllers
                     ids = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).Select(a => a.id).ToList();
                     list03 = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).ToList();
                 }
+               
+                
+                   
             }
             catch (Exception ex)
             {
@@ -570,6 +632,44 @@ namespace SLEC.Controllers
             }
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult EditCat(int Id)
+        {
+            Categorie obj = new Categorie();
+            string url = apiurl + "Categorie/GetCatById?id=" + Id + "";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    obj = JsonConvert.DeserializeObject<Categorie>(responseResult.data.ToString());
+                }
 
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EditSubCat(int Id)
+        {
+            Categorie obj = new Categorie();
+            string url = apiurl + "Categorie/GetSubCatById?id=" + Id + "";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    obj = JsonConvert.DeserializeObject<Categorie>(responseResult.data.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }

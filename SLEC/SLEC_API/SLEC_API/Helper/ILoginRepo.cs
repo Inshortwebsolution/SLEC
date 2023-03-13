@@ -10,5 +10,6 @@ namespace SLEC_API.Helper
    public interface ILoginRepo
     {
         Login Emaillogin(Login login);
+        ExamLogin ExamLogin(ExamLogin examLogin);
     }
 }

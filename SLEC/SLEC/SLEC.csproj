@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -123,10 +129,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Current_ExamController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\Exam_ManageController.cs" />
+    <Compile Include="Controllers\FeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstituteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Student_Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,6 +170,7 @@
     <Content Include="Content\assets\img\slides-3.jpg" />
     <Content Include="Content\assets\js\main.js" />
     <Content Include="Content\assets\scss\Readme.txt" />
+    <Content Include="Content\assets\theme.min.css" />
     <Content Include="Content\assets\vendor\apexcharts\apexcharts.min.js" />
     <Content Include="Content\assets\vendor\bootstrap-icons\bootstrap-icons.css" />
     <Content Include="Content\assets\vendor\bootstrap-icons\index.html" />
@@ -1026,6 +1037,23 @@
     <Content Include="Views\Exam\Exams.cshtml" />
     <Content Include="Views\Exam\Exam_Title.cshtml" />
     <Content Include="Views\Exam\Exam_Question.cshtml" />
+    <Content Include="Views\Institute\Exam_Type.cshtml" />
+    <Content Include="Views\Institute\Exam_Title.cshtml" />
+    <Content Include="Views\Institute\Exam_Question.cshtml" />
+    <Content Include="Views\Admin\Add_Tutorials.cshtml" />
+    <Content Include="Views\Fees\Collect_Fees.cshtml" />
+    <Content Include="Views\Fees\View_Fees_History.cshtml" />
+    <Content Include="Views\Fees\Payment.cshtml" />
+    <Content Include="Views\Shared\Student_LayoutPage.cshtml" />
+    <Content Include="Views\Student_\Index.cshtml" />
+    <Content Include="Views\Student_\Profile.cshtml" />
+    <Content Include="Views\Institute\ExamRequest.cshtml" />
+    <Content Include="Views\Shared\Exam_LayoutPage.cshtml" />
+    <Content Include="Views\Exam_Manage\MoC.cshtml" />
+    <Content Include="Views\Exam_Manage\Exam_Profile.cshtml" />
+    <Content Include="Views\Current_Exam\StartExam.cshtml" />
+    <Content Include="Views\Current_Exam\ExamQUE.cshtml" />
+    <Content Include="Views\Current_Exam\PartialONQUE.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

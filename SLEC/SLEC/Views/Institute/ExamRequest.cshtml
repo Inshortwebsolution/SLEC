@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "ExamRequest";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+        <h2>ExamRequest</h2>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <td>Sr.No</td>
+                        <th>Name</th>
+                        <td>Student_Id</td>
+                        <td>DOB</td>
+                        <td>User Name</td>
+                        <td>Mob No</td>
+                        <td>Institu Id</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody id="tblExmReq">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+     $(document).ready(function () {
+         GetAll();
+     })
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Institute/GetAllExamReqStudent',
+            type: "GET",
+            success: function (data) {
+                $('#tblExmReq').html('');
+                $(data).each(function (i, item) {
+
+                    //var dsdate = new Date(parseInt(item.Pay_Date.substr(6)));
+                    //var date = dsdate.getDate() + '/' + (dsdate.getMonth() + 1) + '/' + dsdate.getFullYear();
+                    $('#tblExmReq').append('<tr><th>' + (i + 1) + '</th><th>' + item.Student_Id + '</th><th>' + item.f_name + '</th><th>' + item.email + '</th><th>' + item.institute_id + '</th><th><a  onclick="Approve(' + item.Student_Id + ')"><button  class="btn btn-warning">Approve</button></a></tr>');
+                })
+
+
+            },
+            error: function () {
+                alert("error get all");
+            }
+        });
+    }
+
+
+    function Approve(Student_Id) {
+        var url = "/Institute/ApproveForExam";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { Student_Id: Student_Id },
+            success: function (flag) {
+                
+            },
+            error: function () {
+                alert("Approved Failed....");
+            }
+
+        })
+    }
+
+</script>

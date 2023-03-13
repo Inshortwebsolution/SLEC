@@ -195,6 +195,62 @@ namespace SLEC_API.Controllers
         }
 
 
+        [Route("api/Categorie/UpdateCategory")]
+        [HttpPost]
+        public HttpResponseMessage UpdateCategory(Categorie categorie)
+        {
+            Response response = new Response();
+            try
+            {
+
+                bool n = Ico.UpdateCat(categorie);
+                if (n)
+                {
+                    response.status = true;
+                    response.data = n;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+        [Route("api/Categorie/GetCatById")]
+        [HttpGet]
+        public HttpResponseMessage GetCatById(int id)
+        {
+            Response response = new Response();
+            Categorie categorie = new Categorie();
+            try
+            {
+
+                categorie = Ico.GetCatById(id);
+                if (categorie != null)
+                {
+                    response.status = true;
+                    response.data = categorie;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
 
         [Route("api/Categorie/GetAll")]
         [HttpGet]
@@ -254,7 +310,62 @@ namespace SLEC_API.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, response);
         }
+        [Route("api/Categorie/UpdateSubCategory")]
+        [HttpPost]
+        public HttpResponseMessage UpdateSUbCategory(Categorie categorie)
+        {
+            Response response = new Response();
+            try
+            {
 
+                bool n = Ico.UpdateSubCat(categorie);
+                if (n)
+                {
+                    response.status = true;
+                    response.data = n;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        [Route("api/Categorie/GetSubCatById")]
+        [HttpGet]
+        public HttpResponseMessage GetSubCatById(int id)
+        {
+            Response response = new Response();
+            Categorie categorie = new Categorie();
+            try
+            {
+
+                categorie = Ico.GetSubCatById(id);
+                if (categorie != null)
+                {
+                    response.status = true;
+                    response.data = categorie;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
 
 
         [Route("api/Categorie/SaveExam_Title")]

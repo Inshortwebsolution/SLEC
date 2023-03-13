@@ -10,9 +10,7 @@ using System.IO;
 using SLEC_API.Models;
 using System.Net;
 using System.Net.Http;
-
-
-
+using System.Net.Mail;
 
 namespace SLEC.Controllers
 {
@@ -169,26 +167,7 @@ namespace SLEC.Controllers
         {
             return View();
         }
-        //public JsonResult Student_Marks(string Id,string Name,string Year)
-        //{
-
-        //    Student obj = new Student();
-        //    string url = "https://localhost:44331/api/Student/MarkGetStudentById?Id=22&Name=&Year=";
-        //    try
-        //    {
-        //        Response responseResult = api.Get(url);
-        //        if (responseResult.status)
-        //        {
-        //            obj = JsonConvert.DeserializeObject<Student>(responseResult.data.ToString());
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return Json(obj, JsonRequestBehavior.AllowGet);
-        //}
+       
 
         public JsonResult Student_MarkDetail(int Id)
         {
@@ -260,9 +239,287 @@ namespace SLEC.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
 
         }
+        public ActionResult Exam_Type()
+        {
+                    return View();
+    }
 
+        public JsonResult GetAllType()
+        {
+            List<Categorie> list = new List<Categorie>();
+            string url = apiurl + "Categorie/GetAllType";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Categorie>>(responseResult.data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAll_Cat()
+        {
+            List<Categorie> list = new List<Categorie>();
+            List<Categorie> list01 = new List<Categorie>();
+            List<Categorie> list02 = new List<Categorie>();
+            string url = apiurl + "Categorie/GetAll";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Categorie>>(responseResult.data.ToString());
+                    list01 = list.Where(x => x.p_id == 0).ToList();
+                    List<int> ids = new List<int>();
+                    ids = list.Where(x => x.p_id == 0).Select(a => a.id).ToList();
+                    list02 = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).ToList();
+                    //ids= list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).Select(a => a.id).ToList();
+                    // var subcat= list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list02, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        public JsonResult GetAllSubCategorie()
+        {
+            List<Categorie> list = new List<Categorie>();
+            List<Categorie> list01 = new List<Categorie>();
+            List<Categorie> list02 = new List<Categorie>();
+            List<Categorie> list03 = new List<Categorie>();
+            string url = apiurl + "Categorie/GetAll";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Categorie>>(responseResult.data.ToString());
+                    list01 = list.Where(x => x.p_id == 0).ToList();
+                    List<int> ids = new List<int>();
+                    List<int> ids2 = new List<int>();
+                    ids = list.Where(x => x.p_id == 0).Select(a => a.id).ToList();
+                    list02 = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).ToList();
+                    ids = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).Select(a => a.id).ToList();
+                    list03 = list.Where(x => x.p_id != 0 && ids.Contains(x.p_id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list03, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Exam_Title()
+        {
+            return View();
+        }
+
+        public JsonResult GetAll_Exam_title()
+        {
+            List<Exam> list = new List<Exam>();
+            string url = apiurl + "Categorie/GetAllExam";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Exam>>(responseResult.data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Exam_Question()
+        {
+            return View();
+        }
+        public JsonResult GetAll_Question()
+        {
+            List<Score> list = new List<Score>();
+            string url = apiurl + "Categorie/GetAllScore"; 
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Score>>(responseResult.data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAll_Question_Preview(int Id)
+        {
+            List<Score> list = new List<Score>();
+            string url = apiurl + "Categorie/GetAllScore";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<Score>>(responseResult.data.ToString());
+                    list = list.Where(x => x.Exam_id == Id).ToList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpGet]
+        //public JsonResult ExamRequest(int id)
+        //{
+        //    Student obj = new Student();
+        //    string url = apiurl + "Student/GetStudentById?id=" + id + "";
+        //    try
+        //    {
+        //        Response responseResult = api.Get(url);
+        //        if (responseResult.status)
+        //        {
+        //            obj = JsonConvert.DeserializeObject<Student>(responseResult.data.ToString());
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+        public ActionResult ExamRequest()
+        {
+            return View();
+        }
+        public JsonResult GetAllExamReqStudent()
+        {
+            List<ExamLogin> list = new List<ExamLogin>();
+            string url = apiurl + "Institute/GetAllExamRequest";
+            try
+            {
+                Response responseResult = api.Get(url);
+                if (responseResult.status)
+                {
+                    list = JsonConvert.DeserializeObject<List<ExamLogin>>(responseResult.data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult ApproveForExam(int Student_Id)
+        {
+            ExamLogin obj = new ExamLogin();
+            Response responseResult = new Response();
+            Response responseResult3 = new Response();
+            Student obc = new Student();
+            Response responseResult2 = new Response();
+            string url = apiurl + "Institute/ApproveExamRequest?id=" + Student_Id + "";
+            string geturl = apiurl + "Student/GetStudentDetailBy_userid?userid=" + Student_Id + "";
+            string geturl2 = apiurl + "Institute/ExamGetByStudentId?Student_Id=" + Student_Id + "";
+
+            try
+            {
+                responseResult = api.Get(url);
+                responseResult2 = api.Get(geturl);
+                responseResult3 = api.Get(geturl2);
+
+                Student obc2 =JsonConvert.DeserializeObject<Student>(responseResult2.data.ToString());
+                ExamLogin obj2 = JsonConvert.DeserializeObject<ExamLogin>(responseResult3.data.ToString());
+
+
+                obc.email = obc2.email;
+                 obj.User_Id = obj2.User_Id;
+                obj.Password = obj2.Password;
+                string receivers = obc.email;
+                string subject = "Your Exam Login Is Registerd";
+                string ajentmassage = "Dear Student Your Id " + obj.User_Id + "Adn Password " + obj.Password + "";
+                 SendEmail(receivers, subject, ajentmassage);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult SendEmail(string receiver, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("jayhind3570@gmail.com", "Jamil");
+                    var receiverEmail = new MailAddress(receiver, "Receiver");
+                    var password = "fgfouhtbnlquukim";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return View();
+                }
+            }
+            catch (Exception ex)                             
+            {
+                ViewBag.Error = "Some Error";
+            }
+            return View();
+        }
+
+        
     }
-    }
+
+}
 
         
 

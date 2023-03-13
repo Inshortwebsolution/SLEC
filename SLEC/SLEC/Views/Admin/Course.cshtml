@@ -4,36 +4,37 @@
     Layout = "~/Views/Shared/Master_LayoutPage.cshtml";
 }
 
-<h2>Course</h2>
+
 <main id="main" class="main">
-<div class="card">
-    <div class="card-body bg-primary-light"  id="DivForm"  >
-        <form class="row g-3" action="/Admin/Course" method="post">
-            <input type="hidden" class="form-control" id="id" name="id">
+    <div class="card">
+        <h2>Course</h2>
+        <div class="card-body bg-primary-light" id="DivForm">
+            <form class="row g-3" action="/Admin/Course" method="post">
+                <input type="hidden" class="form-control" id="id" name="id">
 
-            
-            <div class="col-8">
-                <label for="inputNanme4" class="form-label">Add_Course </label>
-                <input type="text" class="form-control" id="addcourse" name="add_coures">
-            </div>
 
-            <div class="col-8">
-                <label for="inputNanme4" class="form-label">Duration</label>
-                <input type="month" class="form-control" id="start"
-                       min="2018-03" value="2018-05" name="duration">
-            </div>
-            <div class="col-8">
-                <label for="inputNanme4" class="form-label">Fees</label>
-                <input type="number" min="0" max="10000" step="1" name="fees" class="form-control" id="broker_fees" required="required">
-                <br />
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-secondary"  onclick="Delete()">Reset</button>
+                <div class="col-8">
+                    <label for="inputNanme4" class="form-label">Add_Course </label>
+                    <input type="text" class="form-control" id="addcourse" name="add_coures">
                 </div>
-            </div>
-        </form>
+
+                <div class="col-8">
+                    <label for="inputNanme4" class="form-label">Duration</label>
+                    <input type="text" class="form-control" id="duration"
+                           name="duration">
+                </div>
+                <div class="col-8">
+                    <label for="inputNanme4" class="form-label">Fees</label>
+                    <input type="number"  name="fees" class="form-control" id="broker_fees" required="required">
+                    <br />
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="Delete()">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
     </main>
 <main id="main" class="main">
 <div class="card">
@@ -100,7 +101,7 @@
             success: function (data) {
                 $('#id').val(data.id);
                 $('#addcourse').val(data.add_coures);
-                $('#start').val(data.duration);
+                $('#duration').val(data.duration);
                 $('#broker_fees').val(data.fees);
 
 

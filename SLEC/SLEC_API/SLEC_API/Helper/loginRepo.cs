@@ -21,5 +21,16 @@ namespace SLEC_API.Helper
             lst = JsonConvert.DeserializeObject<List<Login>>(json);
             return lst.FirstOrDefault();
         }
+
+        public ExamLogin ExamLogin(ExamLogin examLogin)
+        {
+            List<ExamLogin> lst = new List<ExamLogin>();
+            List<IWS_Exam_login> iwslst = new List<IWS_Exam_login>();
+            iwslst = db.IWS_Exam_login.Where(x => x.User_Id == examLogin.User_Id && x.Password == examLogin.Password).ToList();
+            string json = JsonConvert.SerializeObject(iwslst);
+            lst = JsonConvert.DeserializeObject<List<ExamLogin>>(json);
+            return lst.FirstOrDefault();
+
+        }
     }
 }

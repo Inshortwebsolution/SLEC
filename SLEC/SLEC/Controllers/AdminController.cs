@@ -141,7 +141,7 @@ namespace SLEC.Controllers
             {
                 throw;
             }
-
+            
             return Json(responseResult, JsonRequestBehavior.AllowGet);
         }
 
@@ -296,6 +296,9 @@ namespace SLEC.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-
+       public ActionResult Add_Tutorials()
+        {
+            return View();
+        }
     }
 }

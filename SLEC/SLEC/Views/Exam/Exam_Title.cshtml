@@ -161,7 +161,6 @@
 
 
     function Save() {
-        debugger;
         var formdata = new FormData();
         formdata = $('#tid').serialize();
         $.ajax({
@@ -203,8 +202,9 @@
     }
 
 
-    function Priview(id,examtitle) {
-        $.ajax({
+    function Priview(id, examtitle) {
+        var count = 1;
+        $.ajax({            
             url: '/Exam/GetAll_Question_Preview',
             type: 'POST',
             data: { Id: id },
@@ -212,8 +212,8 @@
                 $('#previewquestion').html('');
                 $(data).each(function (i, item) {
 
-                    $('#previewquestion').append('<div class="col-sm-6 bg-primary-light"> <div class=""><b>' + item.Question + '?</b></div><br /> <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options" id="Opction1"> ' + item.Opction1 + '<span class="checkmark"></span></label><br/> <label class="options" id="Opction2"> ' + item.Opction2 + ' <span class="checkmark"></span> </label><br /> <label class="options" id="Opction3"> ' + item.Opction3 + '<span class="checkmark"></span> </label><br /> <label class="options" id="Opction4"> ' + item.Opction4 + ' <span class="checkmark"></span> </label><br /> <label class="Answer">Answer <input type="text" class="form-control" id="Answer" name="Answer" value="' + item.Answer + '"/> <span class=""></span> </label><br /> </div> </div>')
-                   
+                    $('#previewquestion').append('<div class="col-sm-3 bg-primary-light"> <div class="" ><b>' + (count) +'&nbsp;'+'.'+ item.Question + '?</b></div><br /> <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options" id="Opction1"> ' + '(a)' + '&nbsp;' + item.Opction1 + '<span class="checkmark"></span></label><br/> <label class="options" id="Opction2"> ' + '(b)' + '&nbsp;' + item.Opction2 + ' <span class="checkmark"></span> </label><br /> <label class="options" id="Opction3"> ' + '(c)' + '&nbsp;' + item.Opction3 + '<span class="checkmark"></span> </label><br /> <label class="options" id="Opction4"> ' + '(d)' + '&nbsp;' + item.Opction4 + ' <span class="checkmark"></span> </label><br /> <label class="Answer">Answer <input type="text" class="form-control" id="Answer" name="Answer" value="' + item.Answer + '"/> <span class=""></span> </label><br /> </div> </div>')
+                    count++;
                 })
                 $('#examtitletext').text(examtitle);
             },

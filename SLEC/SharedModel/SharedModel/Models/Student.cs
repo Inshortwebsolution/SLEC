@@ -37,5 +37,9 @@ namespace SharedModel.Models
         public bool isApprove { get; set; }
         public string Year { get; set; }
         public string Status { get; set; }
+        public List<Student> objlst { get; set; }
+        public int? userid { get; set; }
+        public string Request_Exam { get; set; }
+
     }
 }

@@ -1,0 +1,417 @@
+﻿@model SLEC_API.Models.IWS_Student
+
+@{
+    ViewBag.Title = "View_Fees_History";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+<h2>View_Fees_History</h2>
+
+<main id="main" class="main">
+    <div class="bg-success-light @*pt-2 align_text-center*@">
+        <div class="card-body">
+            <input type="hidden" class="form-control" id="id" name="id" value="@Model.id">
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label"> Status:</label>
+
+                    <span class="badge bg-warning text-dark" id="statusspan"></span>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label"> Name:</label>
+                    <span id="name"></span>
+                    <span id="statusspan"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Father Name:</label>
+                    <span id="f_name"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Mother Name:</label>
+                    <span id="m_name"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Last Class:</label>
+                    <span id="lst_class"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Date of Birthday:</label>
+                    <span id="dob"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Course Name:</label>
+                    <span id="course_name"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Cast: </label>
+                    <span id="cast"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Religion :</label>
+                    <span id="religion"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label"> Address:</label>
+                    <span id="address"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Aadhar Number:</label>
+                    <span id="aadhar_NO"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">What'sApp Self:</label>
+                    <span id="whats_no_self"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">What'sApp Home:</label>
+                    <span id="whats_no_home"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Email:</label>
+                    <span id="email"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputname" class="form-label">Relrral Id</label>
+                    <span id="refid"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputNanme4" class="form-label">Institute Id:</label>
+                    <span id="institute_id"></span>
+                </div>
+                <div class="col-6">
+                    <label for="inputname" class="form-label">Year:</label>
+                    <span id="Year"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<main id="main" class="main">
+    <div class="bg-success-light col-12">
+
+        <div class="card-body">
+
+            <div class="col-6">
+                <label for="inputNanme4" class="form-label">Course:</label>
+                <span id="add_coures"></span>
+            </div>
+
+            <div class="col-6">
+                <label for="inputNanme4" class="form-label">Duration:</label>
+                <span id="duration"></span>
+            </div>
+
+            <div class="col-6">
+                <label for="inputNanme4" class="form-label">Fees:</label>
+                <span id="fees"></span>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sr.no</th>
+                    <td>Student_Id</td>
+                    <td>Course_Id</td>
+                    <td>Amaount</td>
+                    <td>Payment_Type</td>
+                    <td>Payment_Type</td>
+                    <td>Date</td>
+
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody id="tblPayment">
+            </tbody>
+        </table>
+
+    </div>
+
+    <!--Payment Modal-->
+
+    <div class="card-body">
+        <h5 class="card-title"></h5>
+        @*<p>You can disable the backdrop by adding <code>data-bs-backdrop="false"</code> to <code>.modal-dialog</code></p>*@
+
+        <!-- Disabled Backdrop Modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
+            PayNow
+        </button>
+        <div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Payment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="card-body" id="DivForm">
+                                <form class="" action="/Institute/" id="Payid" method="post">
+                                    <input type="hidden" class="form-control" id="Payment_Id" name="Payment_Id">
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="inputNanme4" class="form-label">Student_Id:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="Student_Id" name="Student_Id" readonly>
+                                        </div>
+                                    </div><br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="inputNanme4" class="form-label">Course_Id:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="course_id" name="course_id" readonly>
+                                        </div>
+                                    </div><br />
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="inputNanme4" class="form-label">Amount:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="Amount" name="Amount">
+                                        </div>
+                                    </div><br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="input text col-form-lable">Payment Type:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" name="Pay_Type">
+                                                <option value="Course">Course</option>
+                                                <option value="Registration">Registration</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="input text">Payment Method:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" name="Pay_Method">
+                                                <option value="cash">Cash</option>
+                                                <option value="online">Online</option>
+                                            </select>
+
+                                        </div>
+                                    </div><br />
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="inputNanme4" class="form-label"> Date:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control" id="datetime" name="Pay_Date" required>
+                                        </div>
+                                    </div><br />
+
+                                </form>
+
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="Payment()">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- End Disabled Backdrop Modal-->
+
+    </div>
+    <!--End Payment Modal-->
+
+
+
+</main>
+
+
+
+<!--</div>-->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        @*alert('@Model.id');*@
+        Detail('@Model.id');
+        GetAll();
+    })
+    function Detail(stid) {
+
+        var _Id = stid;
+        $.ajax({
+            url: '../Fees/GetByStudent_ID',
+            type: 'POST',
+            data: { Id: _Id},
+            success: function (data) {
+                //alert("success");
+
+                $('#Studentid').val(data.Item1.id);
+                $('#name').text(data.Item1.name);
+                $('#f_name').text(data.Item1.f_name);
+                $('#m_name').html(data.Item1.m_name);
+                $('#lst_class').html(data.Item1.lst_class);
+                $('#dob').html(data.Item1.dob);
+                $('#course_name').html(data.Item1.course_name);
+                $('#cast').html(data.Item1.cast);
+                $('#religion').html(data.Item1.religion);
+                $('#address').html(data.Item1.address);
+                $('#aadhar_NO').html(data.Item1.aadhar_NO);
+                $('#whats_no_self').html(data.Item1.whats_no_self);
+                $('#whats_no_home').html(data.Item1.whats_no_home);
+                $('#email').html(data.Item1.email);
+                $('#refid').html(data.Item1.refid);
+                $('#institute_id').html(data.Item1.institute_id);
+                $('#Year').html(data.Item1.Year);
+                $('#status').val(data.Item1.Status);
+                // <h2 id="nameh1">Kevin Anderson  <span class="badge bg-warning text-dark" id="statusspan">Runing</span></h2>
+                $('#statusspan').html(data.Item1.Status);
+                $('#nameh1').text(data.Item1.name);
+
+
+                $('#add_coures').text(data.Item2.add_coures);
+                $('#duration').text(data.Item2.duration);
+                $('#fees').text(data.Item2.fees);
+
+                $('#Student_Id').val(data.Item1.id);
+                $('#course_id').val(data.Item2.id);
+
+                var sum = 0;
+                var fees = data.Item2.fees;
+                var duration = data.Item2.duration;
+                sum = fees / duration;
+               // alert(sum);
+
+
+
+                //$(data).each(function (i, Item2) {
+                //    $('#tblCourse').html('');
+                //    $('#tblCourse').append('<tr><th>' + Item2.id + '</th><th>' + Item2.add_coures + '</th><th>' + Item2.duration + '</th><th>' + Item2.fees + '</th></tr>');
+                //})
+
+
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+    //function Payment() {s
+    //    $('#Studentid').val(data.Item1.id);
+
+    //}
+
+
+    function Payment() {
+        var formdata = new FormData();
+        formdata = $('#Payid').serialize();
+        $.ajax({
+            url: '/Fees/Save_Payment',
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                if (data.status) {
+
+                }
+
+                else {
+                    alert("fail");
+                }
+            },
+            error: function () {
+                alert("not added");
+            }
+        });
+    }
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Fees/GetAllPayment',
+            type: "GET",
+            success: function (data) {
+                $('#tblPayment').html('');
+                $(data).each(function (i, item)
+                
+                {
+
+                    var dsdate = new Date(parseInt(item.Pay_Date.substr(6)));
+                    var date = dsdate.getDate() + '/' + (dsdate.getMonth() + 1) + '/' + dsdate.getFullYear();
+                    $('#tblPayment').append('<tr><th>' + (i + 1) + '</th><th>' + item.Student_Id + '</th><th>' + item.Course_id + '</th><th>' + item.Amount + '</th><th>' + item.Pay_Type + '</th><th>' + item.Pay_Method + '</th><th>' + date + '</th><th><a  onclick="Delete(' + item.Payment_Id + ')"><button class="btn btn-danger">Delete</button></a></th></tr>');
+                })
+
+
+            },
+            error: function () {
+                alert("error get all");
+            }
+        });
+    }
+
+    function Delete(Payment_Id) {
+        $.ajax({
+            url: '/Fees/Delete',
+            type: 'POST',
+            data: { Id: Payment_Id },
+            success: function (data) {
+                alert("deleted");
+            },
+            error: function () {
+
+                alert("not Deleted");
+            }
+        });
+    }
+    
+
+</script>

@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Exam_Type";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+
+<main id="main" class="main">
+    <div class="card">
+        
+        <div class="card-body">
+            <h2 class="card-title">Exam_Type</h2>
+            <div class="row panel panel-body">
+                <div class="col-sm-4 alert alert-primary">
+                    <h5 class="card-title">Type</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>id</td>
+                                <td>name</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblType">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-4 alert alert-danger">
+                    <h5 class="card-title">Categorie</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>id</td>
+                                <td>name</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblCategorie">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-4 alert alert-warning">
+                    <h5 class="card-title">SubCategorie</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>id</td>
+                                <td>name</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblSubCategorie">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetAll();
+        GetAllCategorie();
+        GetAllSubCategorie();
+    })
+
+
+    function GetAll() {
+        $.ajax({
+            url: '/Institute/GetAllType',
+            type: "GET",
+            success: function (data) {
+                $('#tblType').html('');
+                $(data).each(function (i, item) {
+                    $('#tblType').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th></tr>');
+                })
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+    function GetAllCategorie() {
+        $.ajax({
+            url: '/Institute/GetAll_Cat',
+            type: "GET",
+            success: function (data) {
+                //alert("ok");
+                $('#tblCategorie').html('');
+                $(data).each(function (i, item) {
+                    $('#tblCategorie').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th></tr>');
+                })
+            },
+            error: function () {
+                alert("get category error");
+            }
+        });
+    }
+
+    function GetAllSubCategorie() {
+        $.ajax({
+
+            url: '/Institute/GetAllSubCategorie',
+            type: "GET",
+            success: function (data) {
+                // alert("ok");
+                $('#tblSubCategorie').html('');
+                $(data).each(function (i, item) {
+                    $('#tblSubCategorie').append('<tr><th>' + (i + 1) + '</th><th>' + item.category_name + '</th></tr>');
+                })
+            },
+            error: function () {
+                alert("get Subcategory error");
+            }
+        });
+    }
+</script>

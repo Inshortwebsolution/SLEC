@@ -33,6 +33,7 @@ namespace SLEC_API.Controllers
                     response.status = false;
                     response.error = "Please Check Your username & Password";
                 }
+                
             }
             catch (Exception ex)
             {
@@ -42,6 +43,36 @@ namespace SLEC_API.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.Created, response);
         }
-       
+
+
+        [Route("api/Login/ExamLogin")]
+        [HttpPost]
+        public HttpResponseMessage ExamLogin(ExamLogin examLogin)
+        {
+            Response response = new Response();
+            try
+            {
+                examLogin = repo.ExamLogin(examLogin);
+                if (examLogin != null)
+                {
+                    response.status = true;
+                    response.data = examLogin;
+                }
+                else
+                {
+                    response.status = false;
+                    response.error = "Please Check Your Userid & Password";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+                Request.CreateResponse(HttpStatusCode.BadRequest, response);
+            }
+            return Request.CreateResponse(HttpStatusCode.Created, response);
+        }
+
     }
 }

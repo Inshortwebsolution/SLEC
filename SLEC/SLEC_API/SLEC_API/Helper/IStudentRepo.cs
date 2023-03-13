@@ -18,5 +18,8 @@ namespace SLEC_API.Helper
         Student GetDetailById(int id);
         Student GetDetailByNameYear(string name,string year);
         bool UpdateStatus(int id,string status);
+        Student GetDetailByEmail(string email);
+        Student GetDetailBy_userid(int userid);
+        bool RequestExam(int id);
     }
 }

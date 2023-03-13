@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "Collect_Fees";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+
+<main id="main" class="main">
+    <div class="card bg-success-light">
+
+        <h3>Collect_Fees</h3>
+
+        <div class="col-sm-6">
+
+            <label for="inputNanme4" class="form-label"><b>Student ID</b></label>
+            <input type="text" class="form-control" id="_id" name="id" required>
+            <br />
+
+            <button class="btn btn-primary" onclick="GetStudent()">Search</button>
+
+
+            
+
+        </div>
+    </div>
+</main>
+
+
+
+@*<div class="card bg-success-light">
+
+        <div class="col-8">
+            <label for="inputNanme4" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="col-8">
+            <label for="inputNanme4" class="form-label">Course </label>
+            <input type="text" class="form-control" id="addcourse" name="add_coures">
+        </div>
+
+        <div class="col-8">
+            <label for="inputNanme4" class="form-label">Duration</label>
+            <input type="text" class="form-control" id="duration" name="duration">
+        </div>
+        <div class="col-8">
+            <label for="inputNanme4" class="form-label">Fees</label>
+            <input type="number" min="0" max="10000" step="1" name="fees" class="form-control" id="broker_fees" required="required">
+            <br />
+            <button class="btn btn-primary" onclick="()">Payment</button>
+        </div>
+    </div>*@
+
+<main id="main" class="main">
+    <div class="card bg-success-light">
+        <div class="card-body">
+
+            <div class="col-lg-12">
+
+
+
+
+                <h5 class="card-title"></h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>lst_class</th>
+                            <th>dob</th>
+                            <th>course_name</th>
+                            <th>cast</th>
+                            <th>religion</th>
+                            <th>aadhar_NO</th>
+                            <th>whats_no_self</th>
+                            <th>email</th>
+                            <th>refid</th>
+                            <th>isOnline</th>
+                            <th>Edit</th>
+
+                            <th>Delete</th>
+                            <th>Detail</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblStudent">
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</main>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    
+        $(document).ready(function () {
+            GetAll();
+    })
+
+
+
+    function GetAll() {
+        $.ajax({
+            url: '../Fees/GetAll',
+            type: "GET",
+            success: function (data) {
+                $('#tblStudent').html('');
+                $(data).each(function (i, item) {
+                    if (item.isOnline == '0' || item.isApprove == '0') {
+                        $('#tblStudent').append('<tr><th>' + (i + 1) + '</th><th>' + item.name + '</th><th>' + item.lst_class + '</th><th>' + data.dob + '</th><th>' + item.course_name + '</th><th>' + item.cast + '</th><th>' + item.religion + '</th><th>' + item.aadhar_NO + '</th><th>' + item.whats_no_self + '</th><th>' + item.email + '</th><th>' + item.refid + '</th><th>' + item.isOnline + '</th><th><a  onclick="Edit(' + item.id + ')"><button  class="btn btn-warning">Edit</button></a></th><th><a  onclick="Delete(' + item.id + ')"><button class="btn btn-danger">Delete</button></a></th><th><a  onclick="GetStudent(' + item.id + ')"><button  class="btn btn-warning">Detail</button></a></th></tr>');
+                    }
+
+
+
+
+
+                })
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+
+
+
+    function GetStudent(_stid) {
+        if (_stid == null || stId == 0) {            
+            var stId = $('#_id').val();
+        }
+        else {
+            var stId = _stid;
+        }
+        if (stId == null || stId == 0 || stId == undefined) {
+            alert('Student Id not found!')
+            return;
+        }
+        else {
+            window.location.href = "../Fees/View_Fees_History?STID=" + stId;
+        }
+    }
+    
+
+
+</script>

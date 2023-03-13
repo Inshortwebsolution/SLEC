@@ -28,5 +28,6 @@ namespace SLEC_API.Models
         public Nullable<System.DateTime> Updated_Date { get; set; }
         public string Is_Optional { get; set; }
         public string Is_True_orFalse { get; set; }
+        public Nullable<int> TimeDuration { get; set; }
     }
 }

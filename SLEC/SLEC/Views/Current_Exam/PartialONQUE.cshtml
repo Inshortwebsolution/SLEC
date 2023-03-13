@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SLEC_API.Models.IWS_Score>
+
+<div class="column col-sm-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+                @Html.DisplayNameFor(model => model.Question_NO)
+            </div>
+            <p class="card-text"> @Html.DisplayNameFor(model => model.Question)</p>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class=" column col-sm-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header" style="text-align:center;">
+                <b>Options</b>
+            </div>
+            <br>
+            <div class="card-header brop">
+                A.&nbsp;&nbsp;<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                              <label class="form-check-label " for="flexCheckDefault">
+                                  @Html.DisplayNameFor(model => model.Opction1)
+                              </label>
+            </div>
+            <div class="card-header brop">
+                B.&nbsp;&nbsp;<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                              <label class="form-check-label" for="flexCheckDefault">
+                                  @Html.DisplayNameFor(model => model.Opction2)
+                              </label>
+            </div>
+
+            <div class="card-header brop">
+                C.&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                               <label class="form-check-label" for="flexCheckDefault">
+                                   @Html.DisplayNameFor(model => model.Opction3)
+                               </label>
+            </div>
+            <div class="card-header brop">
+                D.&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                               <label class="form-check-label" for="flexCheckDefault">
+                                   @Html.DisplayNameFor(model => model.Opction4)
+                               </label>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

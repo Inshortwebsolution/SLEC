@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IWSSLSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IWSSLSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="IWS_Categories">
           <Key>
             <PropertyRef Name="id" />
@@ -26,10 +26,10 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="add_coures" Type="varchar" MaxLength="50" />
-          <Property Name="duration" Type="varchar" MaxLength="50" />
           <Property Name="fees" Type="int" />
           <Property Name="isactive" Type="bit" />
           <Property Name="isdeleted" Type="bit" />
+          <Property Name="duration" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="IWS_Exam">
           <Key>
@@ -49,6 +49,43 @@
           <Property Name="Updated_Date" Type="datetime" />
           <Property Name="Is_Optional" Type="varchar" MaxLength="50" />
           <Property Name="Is_True_orFalse" Type="varchar" MaxLength="50" />
+          <Property Name="TimeDuration" Type="int" />
+        </EntityType>
+        <EntityType Name="IWS_Exam_Histroy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Student_Id" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Isdelete" Type="bit" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Created" Type="date" />
+          <Property Name="Updated" Type="date" />
+          <Property Name="Updated_by" Type="int" />
+          <Property Name="Attepted_Id" Type="int" />
+          <Property Name="Exam_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="IWS_Exam_login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Exam_Id" Type="int" />
+          <Property Name="Student_Id" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Updated_Date" Type="date" />
+          <Property Name="Updated_By" Type="int" />
+          <Property Name="Mob_NO" Type="int" />
+          <Property Name="DOB" Type="date" />
         </EntityType>
         <EntityType Name="IWS_Institute">
           <Key>
@@ -89,6 +126,24 @@
           <Property Name="updated_by" Type="int" />
           <Property Name="updated_date" Type="datetime" />
           <Property Name="UserName" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="IWS_Payment">
+          <Key>
+            <PropertyRef Name="Payment_Id" />
+          </Key>
+          <Property Name="Payment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pay_Date" Type="datetime" />
+          <Property Name="Pay_Method" Type="varchar" MaxLength="50" />
+          <Property Name="Pay_Type" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Created_Date" Type="datetime" />
+          <Property Name="Updated_By" Type="int" />
+          <Property Name="Updated_Date" Type="datetime" />
+          <Property Name="Student_Id" Type="int" />
+          <Property Name="course_id" Type="int" />
+          <Property Name="Amount" Type="int" />
         </EntityType>
         <EntityType Name="IWS_Score">
           <Key>
@@ -143,6 +198,23 @@
           <Property Name="isApprove" Type="bit" />
           <Property Name="Year" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="userid" Type="int" />
+          <Property Name="Request_Exam" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="IWS_tbl_Answer">
+          <Key>
+            <PropertyRef Name="Ans_ID" />
+          </Key>
+          <Property Name="Ans_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attempted_Id" Type="int" />
+          <Property Name="Question_Id" Type="int" />
+          <Property Name="Answer" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Creted_By" Type="int" />
+          <Property Name="Created" Type="date" />
+          <Property Name="Updated_By" Type="int" />
+          <Property Name="Updated" Type="date" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -158,14 +230,17 @@
           <EntitySet Name="IWS_Categories" EntityType="Self.IWS_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Courses" EntityType="Self.IWS_Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Exam" EntityType="Self.IWS_Exam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IWS_Exam_Histroy" EntityType="Self.IWS_Exam_Histroy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IWS_Exam_login" EntityType="Self.IWS_Exam_login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Institute" EntityType="Self.IWS_Institute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Login" EntityType="Self.IWS_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IWS_Payment" EntityType="Self.IWS_Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Score" EntityType="Self.IWS_Score" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IWS_Student" EntityType="Self.IWS_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IWS_tbl_Answer" EntityType="Self.IWS_tbl_Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IWSSLSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -213,6 +288,7 @@
           <Property Name="Updated_Date" Type="DateTime" Precision="3" />
           <Property Name="Is_Optional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Is_True_orFalse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TimeDuration" Type="Int32" />
         </EntityType>
         <EntityType Name="IWS_Institute">
           <Key>
@@ -307,6 +383,8 @@
           <Property Name="isApprove" Type="Boolean" />
           <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="Request_Exam" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -327,7 +405,80 @@
           <EntitySet Name="IWS_Score" EntityType="Self.IWS_Score" />
           <EntitySet Name="IWS_Student" EntityType="Self.IWS_Student" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="IWS_Payment" EntityType="IWSSLSEModel.IWS_Payment" />
+          <EntitySet Name="IWS_Exam_login" EntityType="IWSSLSEModel.IWS_Exam_login" />
+          <EntitySet Name="IWS_Exam_Histroy" EntityType="IWSSLSEModel.IWS_Exam_Histroy" />
+          <EntitySet Name="IWS_tbl_Answer" EntityType="IWSSLSEModel.IWS_tbl_Answer" />
         </EntityContainer>
+        <EntityType Name="IWS_Payment">
+          <Key>
+            <PropertyRef Name="Payment_Id" />
+          </Key>
+          <Property Name="Payment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pay_Date" Type="DateTime" Precision="3" />
+          <Property Name="Pay_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pay_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <Property Name="Updated_By" Type="Int32" />
+          <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+          <Property Name="Student_Id" Type="Int32" />
+          <Property Name="course_id" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="IWS_Exam_login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Exam_Id" Type="Int32" />
+          <Property Name="Student_Id" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Updated_Date" Type="DateTime" Precision="0" />
+          <Property Name="Updated_By" Type="Int32" />
+          <Property Name="Mob_NO" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="IWS_Exam_Histroy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Student_Id" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Isdelete" Type="Boolean" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="0" />
+          <Property Name="Updated" Type="DateTime" Precision="0" />
+          <Property Name="Updated_by" Type="Int32" />
+          <Property Name="Attepted_Id" Type="Int32" />
+          <Property Name="Exam_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="IWS_tbl_Answer">
+          <Key>
+            <PropertyRef Name="Ans_ID" />
+          </Key>
+          <Property Name="Ans_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attempted_Id" Type="Int32" />
+          <Property Name="Question_Id" Type="Int32" />
+          <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Creted_By" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="0" />
+          <Property Name="Updated_By" Type="Int32" />
+          <Property Name="Updated" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -365,6 +516,7 @@
           <EntitySetMapping Name="IWS_Exam">
             <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Exam">
               <MappingFragment StoreEntitySet="IWS_Exam">
+                <ScalarProperty Name="TimeDuration" ColumnName="TimeDuration" />
                 <ScalarProperty Name="Exam_Type" ColumnName="Exam_Type" />
                 <ScalarProperty Name="Exam_Id" ColumnName="Exam_Id" />
                 <ScalarProperty Name="Exam_Title" ColumnName="Exam_Title" />
@@ -448,6 +600,8 @@
           <EntitySetMapping Name="IWS_Student">
             <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Student">
               <MappingFragment StoreEntitySet="IWS_Student">
+                <ScalarProperty Name="Request_Exam" ColumnName="Request_Exam" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="f_name" ColumnName="f_name" />
@@ -488,6 +642,79 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IWS_Payment">
+            <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Payment">
+              <MappingFragment StoreEntitySet="IWS_Payment">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+                <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Pay_Type" ColumnName="Pay_Type" />
+                <ScalarProperty Name="Pay_Method" ColumnName="Pay_Method" />
+                <ScalarProperty Name="Pay_Date" ColumnName="Pay_Date" />
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IWS_Exam_login">
+            <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Exam_login">
+              <MappingFragment StoreEntitySet="IWS_Exam_login">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Mob_NO" ColumnName="Mob_NO" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+                <ScalarProperty Name="Exam_Id" ColumnName="Exam_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IWS_Exam_Histroy">
+            <EntityTypeMapping TypeName="IWSSLSEModel.IWS_Exam_Histroy">
+              <MappingFragment StoreEntitySet="IWS_Exam_Histroy">
+                <ScalarProperty Name="Exam_Id" ColumnName="Exam_Id" />
+                <ScalarProperty Name="Attepted_Id" ColumnName="Attepted_Id" />
+                <ScalarProperty Name="Updated_by" ColumnName="Updated_by" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Isdelete" ColumnName="Isdelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IWS_tbl_Answer">
+            <EntityTypeMapping TypeName="IWSSLSEModel.IWS_tbl_Answer">
+              <MappingFragment StoreEntitySet="IWS_tbl_Answer">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Creted_By" ColumnName="Creted_By" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Question_Id" ColumnName="Question_Id" />
+                <ScalarProperty Name="Attempted_Id" ColumnName="Attempted_Id" />
+                <ScalarProperty Name="Ans_ID" ColumnName="Ans_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

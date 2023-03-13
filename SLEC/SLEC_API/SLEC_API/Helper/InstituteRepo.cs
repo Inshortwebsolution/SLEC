@@ -13,6 +13,26 @@ namespace SLEC_API.Helper
     {
         IWSSLSEEntities db = new IWSSLSEEntities();
 
+        public bool ApproveReq(int? id)
+        {
+            bool result = false;
+            try
+            {
+                var item = db.IWS_Exam_login.Where(x => x.Student_Id == id).FirstOrDefault();
+                item.IsActive = true;
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                result = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+
+        }
+
         public bool Delete(int id)
         {
             bool n = false;
@@ -42,6 +62,17 @@ namespace SLEC_API.Helper
             return lst;
         }
 
+        public List<ExamLogin> GetAllExamReq()
+        {
+            List<ExamLogin> lst = new List<ExamLogin>();
+            List<IWS_Exam_login> iwslst = new List<IWS_Exam_login>();
+            iwslst = db.IWS_Exam_login.Where(x => x.IsActive == false && x.IsDeleted == false).ToList();
+            string json = JsonConvert.SerializeObject(iwslst);
+            lst = JsonConvert.DeserializeObject<List<ExamLogin>>(json);
+            return lst;
+
+        }
+
         public Institute GetById(int id)
         {
             Institute inst = new Institute();
@@ -50,6 +81,16 @@ namespace SLEC_API.Helper
             string json = JsonConvert.SerializeObject(iwsinst);
             inst = JsonConvert.DeserializeObject<Institute>(json);
             return inst;
+        }
+
+        public ExamLogin GetByStudentId(int student_Id)
+        {
+            ExamLogin exam = new ExamLogin();
+            IWS_Exam_login iwsexam = new IWS_Exam_login();
+            iwsexam = db.IWS_Exam_login.Where(x => x.Student_Id == student_Id && x.IsActive == true && x.IsDeleted == false).FirstOrDefault();
+            string json = JsonConvert.SerializeObject(iwsexam);
+            exam = JsonConvert.DeserializeObject<ExamLogin>(json);
+            return exam;
         }
 
         public bool Save(Institute inst)

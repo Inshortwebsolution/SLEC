@@ -166,8 +166,10 @@
     <Compile Include="Controllers\CategorieController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ExamManageController.cs" />
     <Compile Include="Controllers\InstituteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -176,14 +178,18 @@
     <Compile Include="Helper\AdminRepo.cs" />
     <Compile Include="Helper\CategorieRepo.cs" />
     <Compile Include="Helper\CourseRepo.cs" />
+    <Compile Include="Helper\ExamManageRepo.cs" />
     <Compile Include="Helper\IAdminRepo.cs" />
     <Compile Include="Helper\ICategorieRepo.cs" />
     <Compile Include="Helper\ICourseRepo.cs" />
+    <Compile Include="Helper\IExamManageRepo.cs" />
     <Compile Include="Helper\IInstituteRepo.cs" />
     <Compile Include="Helper\ILoginRepo.cs" />
     <Compile Include="Helper\InstituteRepo.cs" />
+    <Compile Include="Helper\IPaymentRepo.cs" />
     <Compile Include="Helper\IStudentRepo.cs" />
     <Compile Include="Helper\loginRepo.cs" />
+    <Compile Include="Helper\PaymentRepo.cs" />
     <Compile Include="Helper\StudentRepo.cs" />
     <Compile Include="Models\IWS_Categories.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -194,16 +200,28 @@
     <Compile Include="Models\IWS_Exam.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IWS_Exam_Histroy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IWS_Exam_login.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IWS_Institute.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IWS_Login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IWS_Payment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IWS_Score.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IWS_Student.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IWS_tbl_Answer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -297,6 +315,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Categorie\" />
+    <Folder Include="Views\ExamManae\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

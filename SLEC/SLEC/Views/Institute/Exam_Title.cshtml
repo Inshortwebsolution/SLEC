@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Exam_Title";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+
+<main id="main" class="main">
+    <div class="card bg-secondary-light">
+
+        <div class="card-body">
+            <h2 class="card-title">Exam_Title</h2>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <td>Sr.No</td>
+                        <td>Exam Title</td>
+                        <td>Select Type</td>
+                        <td>Select Categorie</td>
+                        <td>SubCategorie</td>
+                        <td>Num.of Question:</td>
+                        <td>Question Type</td>
+                        <td>Preview</td>
+                    </tr>
+                </thead>
+                <tbody id="Examtitle">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="ExtralargeModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-danger-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Exam:- </h5><span id="examtitletext"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row" id="previewquestion">
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="modal fade" id="ExtralargeModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-danger-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Exam:- </h5><span id="examtitletext"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row" id="previewquestion">
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetAll();
+    })
+
+    function GetAll() {
+        $.ajax({
+            url: '/Institute/GetAll_Exam_title',
+            type: "get",
+            success: function (data) {
+                $('#Examtitle').html('');
+                $(data).each(function (i, item) {
+                    var exam = "";
+                    exam = "'" + item.Exam_Title + "'";
+                    $('#Examtitle').append('<tr><th>' + (i + 1) + '</th><th>' + item.Exam_Title + '</th><th>' + item.Exam_Type + '</th><th>' + item.Categorie + '</th><th>' + item.Sub_Categorie + '</th><th>' + item.Num_Questions + '</th><th>' + item.Is_Optional + '</th></a></th><th><a><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ExtralargeModal" onclick="Priview(' + item.Exam_Id + ',' + exam + ')">Preview</button></a></th></tr>');
+                })
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+
+    function Priview(id, examtitle) {
+        $.ajax({
+            url: '/Institute/GetAll_Question_Preview',
+            type: 'POST',
+            data: { Id: id },
+            success: function (data) {
+                $('#previewquestion').html('');
+                $(data).each(function (i, item) {
+
+                    $('#previewquestion').append('<div class="col-sm-6 bg-primary-light"> <div class=""><b>' + item.Question + '?</b></div><br /> <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options" id="Opction1"> ' + item.Opction1 + '<span class="checkmark"></span></label><br/> <label class="options" id="Opction2"> ' + item.Opction2 + ' <span class="checkmark"></span> </label><br /> <label class="options" id="Opction3"> ' + item.Opction3 + '<span class="checkmark"></span> </label><br /> <label class="options" id="Opction4"> ' + item.Opction4 + ' <span class="checkmark"></span> </label><br /> <label class="Answer">Answer <input type="text" class="form-control" id="Answer" name="Answer" value="' + item.Answer + '"/> <span class=""></span> </label><br /> </div> </div>')
+
+                })
+                $('#examtitletext').text(examtitle);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+    }
+</script>

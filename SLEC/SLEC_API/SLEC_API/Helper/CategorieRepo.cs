@@ -353,5 +353,64 @@ namespace SLEC_API.Helper
             }
             return n;
         }
+
+        public bool UpdateCat(Categorie categorie)
+        {
+            bool result = false;
+            try
+            {
+                var item = db.IWS_Categories.Where(x => x.id == categorie.id).FirstOrDefault();
+                item.category_name = categorie.category_name;
+                item.p_id = categorie.p_id;
+                db.SaveChanges();
+                result = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+
+        }
+
+        public bool UpdateSubCat(Categorie categorie)
+        {
+            bool result = false;
+            try
+            {
+                var item = db.IWS_Categories.Where(x => x.id == categorie.id).FirstOrDefault();
+                item.category_name = categorie.category_name;
+                item.p_id = categorie.p_id;
+                db.SaveChanges();
+                result = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+        }
+
+        public Categorie GetCatById(int id)
+        {
+            Categorie categorie = new Categorie();
+            IWS_Categories iwscategorie = new IWS_Categories();
+            iwscategorie = db.IWS_Categories.Where(x => x.id == id && x.isactive == true && x.isdeleted == false).FirstOrDefault();
+            string json = JsonConvert.SerializeObject(iwscategorie);
+            categorie = JsonConvert.DeserializeObject<Categorie>(json);
+            return categorie;
+        }
+
+        public Categorie GetSubCatById(int id)
+        {
+            Categorie categorie = new Categorie();
+            IWS_Categories iwscategorie = new IWS_Categories();
+            iwscategorie = db.IWS_Categories.Where(x => x.id == id && x.isactive == true && x.isdeleted == false).FirstOrDefault();
+            string json = JsonConvert.SerializeObject(iwscategorie);
+            categorie = JsonConvert.DeserializeObject<Categorie>(json);
+            return categorie;
+        }
     }
     }

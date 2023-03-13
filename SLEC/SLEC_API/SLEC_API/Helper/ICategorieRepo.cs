@@ -29,5 +29,9 @@ namespace SLEC_API.Helper
         bool UpdateExam(Exam exam);
         Exam GetByIdExam(int id);
         bool DeleteExam_Title(int id);
+        bool UpdateCat(Categorie categorie);
+        bool UpdateSubCat(Categorie categorie);
+        Categorie GetCatById(int id);
+        Categorie GetSubCatById(int id);
     }
 }

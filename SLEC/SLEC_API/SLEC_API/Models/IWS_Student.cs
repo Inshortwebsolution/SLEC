@@ -43,5 +43,7 @@ namespace SLEC_API.Models
         public Nullable<bool> isApprove { get; set; }
         public string Year { get; set; }
         public string Status { get; set; }
+        public Nullable<int> userid { get; set; }
+        public string Request_Exam { get; set; }
     }
 }

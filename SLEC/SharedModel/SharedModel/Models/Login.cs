@@ -13,11 +13,12 @@ namespace SharedModel.Models
         public string type { get; set; }
         public bool? isactive { get; set; }
         public bool? isdeleted { get; set; }
-        public int created_by { get; set; }
+        public int? created_by { get; set; }
         public DateTime? created_date { get; set; }
         public int? updated_by { get; set; }
         public DateTime? updated_date { get; set; }
         public string username { get; set; }
+        public int useid { get; set; }
 
     }
 }

@@ -10,5 +10,6 @@ namespace SharedModel.Models
     {
         Response Post(string v, object institute);
         Response Get(string url);
+       
     }
 }

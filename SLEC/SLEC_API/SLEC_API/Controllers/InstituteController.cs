@@ -162,8 +162,91 @@ namespace SLEC_API.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
+        [Route("api/Institute/GetAllExamRequest")]
+        [HttpGet]
+        public HttpResponseMessage GetAllExamRequest()
+        {
+            Response response = new Response();
+            List<ExamLogin> lst = new List<ExamLogin>();
+            try
+            {
+                lst = Repo.GetAllExamReq();
+                if (lst.Count > 0)
+                {
+                    response.status = true;
+                    response.data = lst;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
 
+            return Request.CreateResponse(HttpStatusCode.OK, response);
         }
+        [Route("api/Institute/ApproveExamRequest")]
+        [HttpGet]
+        public HttpResponseMessage ApproveExamRequest(int? id)
+        {
+            Response response = new Response();
+            try
+            {
+
+                bool n = Repo.ApproveReq(id);
+                if (n)
+                {
+                    response.status = true;
+                    response.data = n;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        [Route("api/Institute/ExamGetByStudentId")]
+        [HttpGet]
+        public HttpResponseMessage ExamGetByStudentId(int Student_Id)
+        {
+            Response response = new Response();
+            ExamLogin inst = new ExamLogin();
+            try
+            {
+
+                inst = Repo.GetByStudentId(Student_Id);
+                if (inst != null)
+                {
+                    response.status = true;
+                    response.data = inst;
+                }
+                else
+                {
+                    response.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.error = ex.Message.ToString();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+    }
         
         }
     

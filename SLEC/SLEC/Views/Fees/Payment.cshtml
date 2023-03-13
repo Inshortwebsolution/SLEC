@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/Inst_LayoutPage1.cshtml";
+}
+
+
+
+<main id="main" class="main">
+    <div class="card bg-success-light">
+        <h3>Payment</h3>
+        <div class="card-body" id="DivForm">
+            <form class="row g-3" action="/Institute/" method="post">
+                <input type="hidden" class="form-control" id="Payment_Id" name="Payment_Id">
+                <input type="hidden" class="form-control" id="id" name="Student_Id">
+
+
+                <div class="col-6">
+                    <label for="input text">Payment Type:</label>
+                    <select class="form-control" name="Payment Type:">
+                        <option value="Course">Course</option>
+                        <option value="Registration">Registration</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="input text">Payment Method:</label>
+                    <select class="form-control" name="Payment Method:">
+                        <option value="cash">Cash</option>
+                        <option value="online">Online</option>
+                    </select>
+
+                </div>
+
+                <div class="col-6">
+
+                    <label for="inputNanme4" class="form-label"> Date:</label>
+                    <input type="datetime-local" class="form-control" id="datetime" name="Pay_Date" required>
+
+                </div>
+                <div class="col-5"></div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">PayNow</button>
+                    </div>
+                <div class="col-5">
+                </div>
+            </form>
+
+
+
+        </div>
+            </div>
+</main>
